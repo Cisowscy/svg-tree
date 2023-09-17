@@ -3,6 +3,7 @@
 Sun, Sep 17, 2023 8:31 AM
 
 ------
+
 # Fresh project
 
 Your new Fresh project is ready to go. You can follow the Fresh "Getting
@@ -19,3 +20,9 @@ deno task start
 ```
 
 This will watch the project directory and restart as necessary.
+
+-----
+
+# Deno - Github integrations 
+
+https://github.com/marketplace/actions/setup-deno
