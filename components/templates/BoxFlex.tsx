@@ -3,22 +3,22 @@ import { JSX, Component, Fragment, render } from "preact";
 import type { BoxFlexProps } from "@@@typesChangeLESS/Types.d.ts";
 
 export function BoxFlex(props: BoxFlexProps) {
+  const themeNr = props.themeNr ?? 0;
   const classTailWind = (() => {
-    const themeNr = props.themeNr ?? 0;
     const colorBG = props.colorPalleteBG ?? "slate";
     const colorFG = props.colorPalleteFG ?? "slate";
 
     return {
       container: ` flex-1 flex `,
-      rowbar: ` bg-${colorBG}-${themeNr === 0 ? "800" : "700"}` +
+      rowbar: ` bg-${colorBG}-${themeNr === 0 ? "800" : "700"} border-y-[4px] min-h-[${props.sizeHead}px]` +
         ` hover:bg-${colorBG}-${themeNr === 0 ? "500" : "600"}` +
+        ` border-y-${colorBG}-${themeNr === 0 ? "600" : "500"}/50` +
+        ` hover:border-y-${colorBG}-${themeNr === 0 ? "400" : "500"}/50` +
         `  ${
-          themeNr !== 1 ? "" : `border-l-[4px] border-l-${colorBG}-800/50`
+          themeNr !== 1 ? "" : `border-l-[4px] border-l-${colorBG}-800/50 hover:border-l-${colorBG}-500/50`
         }` +
         `w-full flex-none flex flex-row flex-nowrap items-center justify-evenly content-evenly transition-colors subpixel-antialiased`,
-      header: ` border-t-[4px] min-h-[${props.sizeHead}px]` +
-        ` border-t-${colorBG}-${themeNr === 0 ? "600" : "500"}/50` +
-        ` hover:border-t-${colorBG}-${themeNr === 0 ? "400" : "500"}/50` +
+      header: ` ` +
         ` `,
       footer: ` border-b-[4px] min-h-[${props.sizeFoot}px]` +
         ` border-b-${colorBG}-${themeNr === 0 ? "600" : "500"}/50` +
@@ -26,6 +26,7 @@ export function BoxFlex(props: BoxFlexProps) {
       content:
         `bg-${colorBG}-${themeNr === 0 ? "400" : "500"} flex-1 px-2 py-1` +
         `  ${themeNr !== 1 ? "" : `border-l-[4px] border-l-${colorBG}-400/50`}`,
+      title: `font-mono text-2xl font-bold subpixel-antialiased text-slate-300 text-center`
     };
   })();
   return (
@@ -38,53 +39,10 @@ export function BoxFlex(props: BoxFlexProps) {
         class={`my--overflow-hidden ${props.class ?? ""} ${classTailWind.container} `}
       >
         <header class={`${classTailWind.rowbar} ${classTailWind.header}`}>
-          <div>Item1</div>
-          <div>Item2</div>
-          <div>Item3</div>
+          <span class={` ${classTailWind.title}`}>{props.title}</span>
         </header>
-        <main class={`fresh-page-component-theme-styled-scrollbars-1 ${classTailWind.content} `} style="overflow-y: scroll" >
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
-          <div>Item4</div>
-          <div>Item5</div>
-          <div>Item6</div>
+        <main class={`scrolbar-theme-${themeNr} ${classTailWind.content} `} style="overflow-y: scroll" >
+          {props.children}
         </main>
         <footer class={`${classTailWind.rowbar} ${classTailWind.footer}`}>
           <div>Item7</div>
