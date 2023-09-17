@@ -1,6 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import { JSX, Component, Fragment, render } from "preact";
-import type { BoxFlexProps } from "@@@typesChangeLESS/Types.d.ts";
+import type { BoxFlexProps } from "@@@types";
 
 export function BoxFlex(props: BoxFlexProps) {
   const themeNr = props.themeNr ?? 0;

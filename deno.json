@@ -24,13 +24,13 @@
     ]
   },
   "imports": {    
+    "@@@templatesChangeLESS":"./exports/@@@templatesChangeLESS.ts",
+    "@@@interfacesChangeLESS":"./exports/@@@interfacesChangeLESS.ts",
+    "@@@types":"./types.d.ts",
     "@@@interfacesChangeLESS/":"./components/interfaces/",
     "@@@templatesChangeLESS/":"./components/templates/",
-    "@@@typesChangeLESS/":"./components/types/",
     "@@@interfacesChangeABLE/":"./islands/interfaces/",
     "@@@templatesChangeABLE/":"./islands/templates/",
-    "@@@typesChangeABLE/":"./islands/types/",
-    "@@@types/":"./types/",
     "@@@logic":"./logic/",
     "@@@routes":"./routes/",
     "@@@themes":"./static/themes/",

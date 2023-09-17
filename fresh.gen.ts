@@ -9,7 +9,8 @@ import * as $3 from "./routes/api/joke.ts";
 import * as $4 from "./routes/greet/[name].tsx";
 import * as $5 from "./routes/index.tsx";
 import * as $6 from "./routes/index2.tsx";
-import * as $$0 from "./islands/templates/Counter2.tsx";
+import * as $$0 from "./islands/interfaces/SvgFractionTree.tsx";
+import * as $$1 from "./islands/templates/Counter2.tsx";
 
 const manifest = {
   routes: {
@@ -22,7 +23,8 @@ const manifest = {
     "./routes/index2.tsx": $6,
   },
   islands: {
-    "./islands/templates/Counter2.tsx": $$0,
+    "./islands/interfaces/SvgFractionTree.tsx": $$0,
+    "./islands/templates/Counter2.tsx": $$1,
   },
   baseUrl: import.meta.url,
 };
