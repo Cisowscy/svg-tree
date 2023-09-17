@@ -1,0 +1,37 @@
+  /*  https://css-tricks.com/the-current-state-of-styling-scrollbars-in-css/ */
+  .fresh-page-component-theme-styled-scrollbars-1{
+    /* Foreground, Background*/
+    scrollbar-color: #bbc5d4 #333f52;
+  }
+  .fresh-page-component-theme-styled-scrollbars-1::-webkit-scrollbar {
+    width: 4px; /* Mostly for vertical scrollbars */
+    height: 4px; /* Mostly for horizontal scrollbars */
+  }
+  .fresh-page-component-theme-styled-scrollbars-1::-webkit-scrollbar-thumb { /* Foreground */
+    background: #bbc5d4;
+  }
+  .fresh-page-component-theme-styled-scrollbars-1::-webkit-scrollbar-thumb:hover { /* Foreground */
+    background: #FFFFFF;
+  }
+  .fresh-page-component-theme-styled-scrollbars-1::-webkit-scrollbar-track { /* Background */
+    background: #333f52;
+    
+  }
+  
+  .fresh-page-component-theme-styled-scrollbars-2{
+    /* Foreground, Background*/
+    scrollbar-color: #a3aebd #4c5b70;
+  }
+  .fresh-page-component-theme-styled-scrollbars-2::-webkit-scrollbar {
+    width: 4px; /* Mostly for vertical scrollbars */
+    height: 4px; /* Mostly for horizontal scrollbars */
+  }
+  .fresh-page-component-theme-styled-scrollbars-2::-webkit-scrollbar-thumb { /* Foreground */
+    background: #a3aebd;
+  }
+  .fresh-page-component-theme-styled-scrollbars-2::-webkit-scrollbar-thumb:hover { /* Foreground */
+    background: #FFFFFF;
+  }
+  .fresh-page-component-theme-styled-scrollbars-2::-webkit-scrollbar-track { /* Background */
+    background: #4c5b70;
+  }

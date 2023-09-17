@@ -6,6 +6,24 @@ export default function Home() {
   const count2 = useSignal(3);
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
+      <p class="my-4">
+    Try updating this message in the
+    <code class="mx-2">./routes/index.tsx</code> file, and refresh.
+  </p>
+      <p class="my-4">
+          Try updating this message in the
+          <code class="mx-2">./routes/index.tsx</code> file, and refresh.
+        </p>
+      
+      <p class="my-4">
+    Try updating this message in the
+    <code class="mx-2">./routes/index.tsx</code> file, and refresh.
+  </p>
+      <p class="my-4">
+          Try updating this message in the
+          <code class="mx-2">./routes/index.tsx</code> file, and refresh.
+        </p>
+      
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
         <img
           class="my-6"

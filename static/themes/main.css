@@ -13,3 +13,9 @@ html, body, .layout {
   -moz-box-sizing: border-box; 
   -webkit-box-sizing: border-box;
 }
+.my--overflow-hidden{
+  overflow: hidden;
+}
+.my--overflow-scrol{
+  overflow: scrol;
+}
