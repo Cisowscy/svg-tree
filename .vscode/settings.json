@@ -1,0 +1,49 @@
+{
+  "editor.fontLigatures": true,
+  "deno.enable": true,
+  "deno.lint": true,
+  "deno.unstable": true,
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[markdown]": {
+      "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+      "editor.wordWrap": "off"
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.productIconTheme": "material-product-icons",
+  "material-icon-theme.activeIconPack": "react_redux",
+  "material-icon-theme.folders.associations": {
+      "islands": "Animation",
+      "signals": "Decorators",
+      "states": "Decorators"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDragAndDrop": true,
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "search.exclude": {
+      "**/.history": true,     
+      "**/fresh.gen.ts": true
+  },
+  "files.readonlyInclude": {
+    "fresh.gen.ts": true,
+    "**/.history/**": true, 
+  },
+  "editor.tabSize": 2,
+  "vscode-edge-devtools.defaultEntrypoint": "",
+  "vscode-edge-devtools.browserFlavor": "Dev",
+  "vscode-edge-devtools.defaultUrl": "http://localhost:3333/",
+  "vscode-edge-devtools.showWorkers": true,
+  "vscode-edge-devtools.webRoot": "${workspaceFolder}/dev.ts",
+  "vscode-edge-devtools.port": 7490,
+}

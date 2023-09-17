@@ -3,6 +3,8 @@
   "isOrdered": true,
   "folders": {},
   "files": {
-    "README": 0
+    "README": 0,
+    "CHANGES": 1,
+    "TODO": 2
   }
 }
