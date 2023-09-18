@@ -81,4 +81,110 @@ interface SvgProps extends JSX.SVGAttributes<SVGSVGElement> {
   sizePX: number;
   children: ComponentChildren;
 }
+interface SvgFractionTreePlotProps {
+  layers: Signal<ConfigLayerCount>;
+  layer1: Signal<ConfigLayerTypes>;
+  layer2: Signal<ConfigLayerTypes>;
+  layer3: Signal<ConfigLayerTypes>;
+  layer4: Signal<ConfigLayerTypes>;
+  layer5: Signal<ConfigLayerTypes>;
+  layer6: Signal<ConfigLayerTypes>;
+  layer7: Signal<ConfigLayerTypes>;
+}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export type initTreeFractionRhoOut = {
+  info: TypeInitNewTreeInfo;
+  data: TypeInitNewTreeData;
+}
+
+export type TypeInitNewTreeData = {
+  par: Par[];
+  per: Per[];
+}
+
+export type Par = {
+  info: ParInfo;
+  data: ParData;
+}
+
+export type ParData = {
+  itemType: PurpleItemType;
+  indexPar: number | null;
+  angleFra: number;
+}
+
+export type PurpleItemType = "isEND" | "isPAR" | "isGAP";
+
+export type ParInfo = {
+  indexFra:       number;
+  indexFraInc:    number;
+  indexFraDec:    number;
+  indexFraIncMod: number;
+  indexFraDecMod: number;
+}
+
+export type Per = {
+  info: ParInfo;
+  data: PerData;
+}
+
+export type PerData = {
+  itemType: FluffyItemType;
+  indexPer: number | null;
+  angleFra: number;
+}
+
+export type FluffyItemType = "isPER" | "isEND" | "isMID";
+
+export type TypeInitNewTreeInfo = {
+  indexGen:     number;
+  setGap:       number;
+  setEnd:       number;
+  itemsFra:     number;
+  itemsFraPar:  ItemsFraP;
+  itemsFraPer:  ItemsFraP;
+  angleFraStep: number;
+}
+
+export type ItemsFraP = {
+  itemsGen:     number;
+  itemsGap:     number;
+  itemsEnd:     number;
+  angleFraZero: number;
+}

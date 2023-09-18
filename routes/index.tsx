@@ -1,6 +1,6 @@
 import { useSignal } from "@preact/signals";
 import { BoxFlex, Svg } from "@@@templatesChangeLESS";
-import { SvgFractionTreeConfig } from "@@@interfacesChangeABLE";
+import { SvgFractionTreeConfig, SvgFractionTreePlot } from "@@@interfacesChangeABLE";
 
 export default function Home() {  
   const cofigCountLayers = useSignal({
@@ -61,8 +61,8 @@ export default function Home() {
       themeNr={0} sizeHead={50} sizeFoot={30} 
       class="flex-1 flex-col flex-nowrap" title="Generator SVG Sekwencji Drzewiastej"
     >    
-      <Svg sizePX={400} class={`border-1 border-rose-700`}>
-
+      <Svg sizePX={400} class={`border-1 border-rose-700`}>      
+        <SvgFractionTreePlot layers={cofigCountLayers} layer1={cofigTypesLayer1} layer2={cofigTypesLayer2} layer3={cofigTypesLayer3} layer4={cofigTypesLayer4} layer5={cofigTypesLayer5} layer6={cofigTypesLayer6} layer7={cofigTypesLayer7} />
       </Svg>
       <div>itemX</div>
     </BoxFlex>
