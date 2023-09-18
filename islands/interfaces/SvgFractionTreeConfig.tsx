@@ -1,55 +1,41 @@
 // Document https://fresh.deno.dev/docs/concepts/islands
 
-import type { Signal } from "@preact/signals";
-import type { SvgFractionTreeConfigProps, ConfigLayerType } from "@@@types";
-import { SvgFractionTreeConfigRho, SvgFractionTreeConfigPhi } from "@@@interfacesChangeLESS";
-import { InputNumber, InputColor } from "@@@templatesChangeLESS";
-
-
 import { useState } from 'preact/hooks';
+import type { Signal } from "@preact/signals";
+import type { SvgFractionTreeConfigProps } from "@@@types";
+import { InputNumber, InputColor, FieldSetCol3 } from "@@@templatesChangeLESS";
+
 
 
 export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
   const handleOnInput_changeConfigCountLayers = event => (props.layers.value={...props.layers.value, [event.target.name]: event.target.value});  
-  const handleOnInput_changeConfigTypesLayer1 = event => (props.layer1.value={...props.layer1.value, [event.target.name]: event.target.value});
+  const handleOnInput_changeConfigTypesLayer1 = event => (props.layer1.value={...props.layer1.value, [event.target.name]: event.target.value});  
+  const handleOnInput_changeConfigTypesLayer2 = event => (props.layer2.value={...props.layer2.value, [event.target.name]: event.target.value});  
+  const handleOnInput_changeConfigTypesLayer3 = event => (props.layer3.value={...props.layer3.value, [event.target.name]: event.target.value});  
+  const handleOnInput_changeConfigTypesLayer4 = event => (props.layer4.value={...props.layer4.value, [event.target.name]: event.target.value});  
+  const handleOnInput_changeConfigTypesLayer5 = event => (props.layer5.value={...props.layer5.value, [event.target.name]: event.target.value});  
+  const handleOnInput_changeConfigTypesLayer6 = event => (props.layer6.value={...props.layer6.value, [event.target.name]: event.target.value});  
+  const handleOnInput_changeConfigTypesLayer7 = event => (props.layer7.value={...props.layer7.value, [event.target.name]: event.target.value});
 
-  //  const value = event.target.value;
-  //  //[props.count4.value[event.target.name]]:value
-  //  (props.count3.value = event.target.value)
-  //};
-  
-  const [state, setState] = useState({gen:5,gap:4,end:3});  
-  const handle_onInput_4 = event => {
-    const value = event.target.value;
-    setState({
-      ...state,
-      [event.target.name]: value
-    });
-  };
   return (
     <div>
-      <form name="changeConfigCountLayers">
-        <h1> changeConfigCountLayers </h1>
-        <label > GEN <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} name="gen" value={props.layers.value.gen} onInput={handleOnInput_changeConfigCountLayers}   /> </label>
-        <label > END <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} name="end" value={props.layers.value.end} onInput={handleOnInput_changeConfigCountLayers}   /> </label>
-        <label > GAP <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} name="gap" value={props.layers.value.gap} onInput={handleOnInput_changeConfigCountLayers}   /> </label>
-        <hr />
-        <span>|GEN:{props.layers.value.gen}|END:{props.layers.value.end}|GAP:{props.layers.value.gap}|</span>
-      </form>
-      <br />      
-      <form name="changeConfigTypesLayerX">
-        <h1> changeConfigTypesLayer1 </h1>
-        <label > RhoPa <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} name="rhoPa" value={props.layer1.value.rhoPa} onInput={handleOnInput_changeConfigTypesLayer1}   /> </label>
-        <label > Color <InputColor class={`w-full h-full`} name="color" value={props.layer1.value.color}  onInput={handleOnInput_changeConfigTypesLayer1} /> </label>
-        <label > RhoPe <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} name="rhoPe" value={props.layer1.value.rhoPe} onInput={handleOnInput_changeConfigTypesLayer1}   /> </label>
-        <hr />
-        <span>|RhoPa:{props.layer1.value.rhoPa}|Color:{props.layer1.value.color}|RhoPe:{props.layer1.value.rhoPe}|</span>
-      </form>
-    <SvgFractionTreeConfigPhi title={`pokolenia`}/>
-    <SvgFractionTreeConfigRho title={`pokolenie X`}/>
-      <button onClick={() => props.count.value -= 1}>-1</button>
-      <p>{props.count}</p>
-      <button onClick={() => props.count.value += 1}>+1</button>
+      <FieldSetCol3  title={`pokolenia`} name="cofigLayers">
+        <InputNumber name="gen" value={props.layers.value.gen} onInput={handleOnInput_changeConfigCountLayers} title="GEN" class={`w-full h-full`} class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={0.5} />
+        <InputNumber name="end" value={props.layers.value.end} onInput={handleOnInput_changeConfigCountLayers} title="END" class={`w-full h-full`} class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={0.5} />
+        <InputNumber name="gap" value={props.layers.value.gap} onInput={handleOnInput_changeConfigCountLayers} title="GAP" class={`w-full h-full`} class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={0.5} />
+        <p class={`text-[10px]`} >GEN: {props.layers.value.gen}</p>
+        <p class={`text-[10px]`} >END: {props.layers.value.end}</p>
+        <p class={`text-[10px]`} >GAP: {props.layers.value.gap}</p>
+      </FieldSetCol3>
+
+      <FieldSetCol3  title={`pokolenie X`}  name="cofigLayerX">
+        <InputNumber name="rhoPa" value={props.layer1.value.rhoPa} onInput={handleOnInput_changeConfigTypesLayer1} title="RhoPa" class={`w-full h-full`} class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={0.5} />
+        <InputColor  name="color" value={props.layer1.value.color} onInput={handleOnInput_changeConfigTypesLayer1} title="Color" class={`w-full h-full`} class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`}/>
+        <InputNumber name="rhoPe" value={props.layer1.value.rhoPe} onInput={handleOnInput_changeConfigTypesLayer1} title="RhoPe" class={`w-full h-full`} class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={0.5} />
+        <p class={`text-[10px]`} >RhoPa: {props.layer1.value.rhoPa}</p>
+        <p class={`text-[10px]`} >Color: {props.layer1.value.color}</p>
+        <p class={`text-[10px]`} >RhoPe: {props.layer1.value.rhoPe}</p>
+      </FieldSetCol3>
     </div>
   );
 }

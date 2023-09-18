@@ -1,5 +1,5 @@
 import { computed, signal } from "@preact/signals";
-import type { SvgFractionTreeConfigRhoProps, ConfigLayerType } from "@@@types";
+import type { SvgFractionTreeConfigRhoProps } from "@@@types";
 import { InputNumber, InputColor } from "@@@templatesChangeLESS";
 
 export const configLabel = signal([3,"#ab01ef",4]);
@@ -24,9 +24,9 @@ export function SvgFractionTreeConfigRho(props: SvgFractionTreeConfigRhoProps) {
       <legend class={`${classTailWind.fieldset_legend}`}>(ρ) {props.title}</legend>
       <div class={` ${classTailWind.fieldset_grid}`}>
 
-        <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} value={configLabel.value[0]}  /> 
-        <InputColor class={`w-full h-full`} value={configLabel.value[1]}  /> 
-        <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} value={configLabel.value[2]}  /> 
+        <InputNumber class4label={`text-[16.5px]`} class4input={`text-[26.5px]`} title="rhoPa" value={configLabel.value[0]} min={1} max={9} step={0.5}   /> 
+        <InputColor  class4label={`text-[16.5px]`} class4input={`text-[26.5px]`} title="color" value={configLabel.value[1]}  /> 
+        <InputNumber class4label={`text-[16.5px]`} class4input={`text-[26.5px]`} title="rhoPe" value={configLabel.value[2]} min={1} max={9} step={0.5}   /> 
 
       </div>
          {/*} 

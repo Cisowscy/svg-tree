@@ -24,6 +24,15 @@ export interface BoxFlexProps extends JSX.HTMLAttributes<HTMLDivElement>{
   title:string;
 }
 
+export interface FieldSetCol3Props extends JSX.HTMLAttributes<HTMLFieldSetElement>{
+  children: ComponentChildren;
+  class? : string;
+  colorPalleteBG?: TailWindColorPallete;
+  colorPalleteFG?: TailWindColorPallete;
+  title: string;
+  name: string;
+}
+
 export interface InputNumberProps extends JSX.HTMLAttributes<HTMLInputElement>{
   class? : string;
   colorPalleteBG?: TailWindColorPallete;
@@ -32,12 +41,18 @@ export interface InputNumberProps extends JSX.HTMLAttributes<HTMLInputElement>{
   max:number;
   step:number;
   value:number;
+  title: string;
+  class4input?: string;
+  class4label?: string;
 }
 export interface InputColorProps extends JSX.HTMLAttributes<HTMLInputElement>{
   class? : string;
   colorPalleteBG?: TailWindColorPallete;
   colorPalleteFG?: TailWindColorPallete;
   value:string;
+  title: string;
+  class4input?: string;
+  class4label?: string;
 }
 
 export type ConfigLayerCount = {
@@ -56,7 +71,7 @@ export interface SvgFractionTreeConfigRhoProps extends JSX.HTMLAttributes<HTMLFi
   colorPalleteBG?: TailWindColorPallete;
   colorPalleteFG?: TailWindColorPallete;
   title:string;
-  layerX?: Signal<ConfigLayerTypes>;
+  layerX: Signal<ConfigLayerTypes>;
   fOnInput?:any;
 }
 export interface SvgFractionTreeConfigPhiProps extends JSX.HTMLAttributes<HTMLFieldSetElement>{
@@ -64,10 +79,16 @@ export interface SvgFractionTreeConfigPhiProps extends JSX.HTMLAttributes<HTMLFi
   colorPalleteBG?: TailWindColorPallete;
   colorPalleteFG?: TailWindColorPallete;
   title:string;
-  layers?: Signal<ConfigLayerCount>;
+  layers: Signal<ConfigLayerCount>;
   fOnInput?:any;
 }
 interface SvgFractionTreeConfigProps {
   layers: Signal<ConfigLayerCount>;
   layer1: Signal<ConfigLayerTypes>;
+  layer2: Signal<ConfigLayerTypes>;
+  layer3: Signal<ConfigLayerTypes>;
+  layer4: Signal<ConfigLayerTypes>;
+  layer5: Signal<ConfigLayerTypes>;
+  layer6: Signal<ConfigLayerTypes>;
+  layer7: Signal<ConfigLayerTypes>;
 }
