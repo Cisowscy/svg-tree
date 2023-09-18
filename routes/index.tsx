@@ -2,7 +2,7 @@
 
 //import Counter2 from "@@@templatesChangeABLE/Counter2.tsx";
 import { BoxFlex } from "@@@templatesChangeLESS";
-import { SvgFractionTreeConfigLayer } from "@@@interfacesChangeLESS";
+import { SvgFractionTreeConfigRho, SvgFractionTreeConfigPhi } from "@@@interfacesChangeLESS";
 
 export default function Home() {
   const classTailWind = {
@@ -82,7 +82,8 @@ export default function Home() {
       themeNr={1}  sizeHead={60} sizeFoot={40} 
       class="flex-none w-60 flex-col flex-nowrap" title="Konfiguracja Generatora"
     >
-      <SvgFractionTreeConfigLayer />
+      <SvgFractionTreeConfigPhi title={`pokolenia`}/>
+      <SvgFractionTreeConfigRho title={`pokolenie X`}/>
       
       <div>item1</div>
       <div>item1</div>
