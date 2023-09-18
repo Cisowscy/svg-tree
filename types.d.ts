@@ -66,22 +66,6 @@ export type ConfigLayerTypes = {
   color: string
 };
 
-export interface SvgFractionTreeConfigRhoProps extends JSX.HTMLAttributes<HTMLFieldSetElement>{
-  class? : string;
-  colorPalleteBG?: TailWindColorPallete;
-  colorPalleteFG?: TailWindColorPallete;
-  title:string;
-  layerX: Signal<ConfigLayerTypes>;
-  fOnInput?:any;
-}
-export interface SvgFractionTreeConfigPhiProps extends JSX.HTMLAttributes<HTMLFieldSetElement>{
-  class? : string;
-  colorPalleteBG?: TailWindColorPallete;
-  colorPalleteFG?: TailWindColorPallete;
-  title:string;
-  layers: Signal<ConfigLayerCount>;
-  fOnInput?:any;
-}
 interface SvgFractionTreeConfigProps {
   layers: Signal<ConfigLayerCount>;
   layer1: Signal<ConfigLayerTypes>;
@@ -92,3 +76,9 @@ interface SvgFractionTreeConfigProps {
   layer6: Signal<ConfigLayerTypes>;
   layer7: Signal<ConfigLayerTypes>;
 }
+interface SvgProps extends JSX.SVGAttributes<SVGSVGElement> {
+  class? : string;
+  sizePX: number;
+  children: ComponentChildren;
+}
+

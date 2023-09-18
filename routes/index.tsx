@@ -1,6 +1,5 @@
 import { useSignal } from "@preact/signals";
-import { BoxFlex } from "@@@templatesChangeLESS";
-
+import { BoxFlex, Svg } from "@@@templatesChangeLESS";
 import { SvgFractionTreeConfig } from "@@@interfacesChangeABLE";
 
 export default function Home() {  
@@ -51,74 +50,27 @@ export default function Home() {
   const classTailWind = {
     root:`flex-1 flex flex-row flex-nowrap`
   };
+  
   return (
   <div class={`${classTailWind.root}`}>
     
+
+
+
     <BoxFlex as="main" colorPalleteBG="slate" colorPalleteFG="slate"
       themeNr={0} sizeHead={50} sizeFoot={30} 
       class="flex-1 flex-col flex-nowrap" title="Generator SVG Sekwencji Drzewiastej"
     >    
-      
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
+      <Svg sizePX={400} class={`border-1 border-rose-700`}>
+
+      </Svg>
+      <div>itemX</div>
     </BoxFlex>
+
+
+
+
+
     
     <BoxFlex as="aside" colorPalleteBG="slate" colorPalleteFG="slate"
       themeNr={1}  sizeHead={60} sizeFoot={40} 
@@ -126,54 +78,7 @@ export default function Home() {
     >
       <SvgFractionTreeConfig layers={cofigCountLayers} layer1={cofigTypesLayer1} layer2={cofigTypesLayer2} layer3={cofigTypesLayer3} layer4={cofigTypesLayer4} layer5={cofigTypesLayer5} layer6={cofigTypesLayer6} layer7={cofigTypesLayer7}/>
       
-      
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
-      <div>item1</div>
+      <div>itemX</div>
     </BoxFlex>
   </div>
   );
