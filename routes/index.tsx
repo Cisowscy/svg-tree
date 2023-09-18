@@ -1,10 +1,23 @@
-//import { useSignal } from "@preact/signals";
-
-//import Counter2 from "@@@templatesChangeABLE/Counter2.tsx";
+import { useSignal } from "@preact/signals";
 import { BoxFlex } from "@@@templatesChangeLESS";
 import { SvgFractionTreeConfigRho, SvgFractionTreeConfigPhi } from "@@@interfacesChangeLESS";
 
-export default function Home() {
+import { SvgFractionTreeConfig } from "@@@interfacesChangeABLE";
+
+export default function Home() {  
+  const cofigCountLayers = useSignal({
+    gen:5,
+    end:7,
+    gap:3
+  });
+  const cofigTypesLayer1 = useSignal({
+    rhoPa:4,
+    rhoPe:3,
+    color:"#579bdf"
+  });
+  const count2 = useSignal(2);
+  const count3 = useSignal([1,5]);
+  const count4 = useSignal({gen:5,gap:4});
   const classTailWind = {
     root:`flex-1 flex flex-row flex-nowrap`
   };
@@ -16,7 +29,7 @@ export default function Home() {
       class="flex-1 flex-col flex-nowrap" title="Generator SVG Sekwencji Drzewiastej"
     >
       
-      
+      <SvgFractionTreeConfig layers={cofigCountLayers} layer1={cofigTypesLayer1}/>
       <div>item1</div>
       <div>item1</div>
       <div>item1</div>

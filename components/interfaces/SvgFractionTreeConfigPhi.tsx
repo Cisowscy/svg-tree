@@ -19,6 +19,12 @@ export function SvgFractionTreeConfigPhi(props: SvgFractionTreeConfigPhiProps) {
       + ` hover:border-${colorBG}-900/50 hover:bg-${colorBG}-800/50 hover:text-${colorFG}-300 `,
     };
   })();
+  //const handleOnonChangeGen = event => (_PROPS.gen1RhoPe.value = event.target.value);
+  //const handleOnonChangeGen = event => (alert(event.target.value));
+  //const handleOnonChangeGen = event => (alert(event.target.value));
+  function handleChange(evt) {
+    console.log("new value", evt.target.value);
+  }
   return (
     <fieldset 
       {...props}
@@ -30,7 +36,7 @@ export function SvgFractionTreeConfigPhi(props: SvgFractionTreeConfigPhiProps) {
         <h2 class={` ${classTailWind.inputs_label} `}>GEN</h2>
         <h2 class={` ${classTailWind.inputs_label} `}>END</h2>
         <h2 class={` ${classTailWind.inputs_label} `}>GAP</h2>
-        <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} value={configLabel.value[0]}  />
+        <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} value={configLabel.value[0]} onInput={handleChange} />
         <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} value={configLabel.value[1]}  />
         <InputNumber class={`w-full h-full`} min={1} max={9} step={0.5} value={configLabel.value[2]}  />
 

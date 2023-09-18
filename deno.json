@@ -23,14 +23,13 @@
       "_fresh"
     ]
   },
-  "imports": {    
+  "imports": {  
     "@@@templatesChangeLESS":"./exports/@@@templatesChangeLESS.ts",
     "@@@interfacesChangeLESS":"./exports/@@@interfacesChangeLESS.ts",
+    "@@@templatesChangeABLE":"./exports/@@@templatesChangeABLE.ts",
+    "@@@interfacesChangeABLE":"./exports/@@@interfacesChangeABLE.ts",
     "@@@types":"./types.d.ts",
-    "@@@interfacesChangeLESS/":"./components/interfaces/",
-    "@@@templatesChangeLESS/":"./components/templates/",
-    "@@@interfacesChangeABLE/":"./islands/interfaces/",
-    "@@@templatesChangeABLE/":"./islands/templates/",
+    
     "@@@logic":"./logic/",
     "@@@routes":"./routes/",
     "@@@themes":"./static/themes/",
@@ -38,6 +37,11 @@
     "@/": "./",
     "./": "./",
     "@@@/": "./",
+
+    "@@@interfacesChangeLESS/":"./components/interfaces/",
+    "@@@templatesChangeLESS/":"./components/templates/",
+    "@@@interfacesChangeABLE/":"./islands/interfaces/",
+    "@@@templatesChangeABLE/":"./islands/templates/",
 
     "$fresh/": "https://deno.land/x/fresh@1.4.3/",
     "preact": "https://esm.sh/preact@10.17.1",
