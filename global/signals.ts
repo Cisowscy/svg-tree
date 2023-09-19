@@ -166,8 +166,8 @@ export const TREE_SETING: ReadonlySignal<{
   };
   PLY: {
       PHI: {
-          PAR: number;
-          PER: number;
+          PAR: { DEG: number; TYP: string };
+          PER: { DEG: number; TYP: string };
       }[];
       RHO: {
           PAR: number[];
@@ -257,6 +257,7 @@ export const TREE_SETING: ReadonlySignal<{
           DEC: number[];
       };
   }[] = [];
+    //const gapEND_gapMID_bitPER_bitPAR = [];
     const U = Q.PLY.map((X,iX) => {
       //console.log("-".repeat(20));
       const R = (() =>{      
@@ -293,21 +294,22 @@ export const TREE_SETING: ReadonlySignal<{
         const infoITEM = {order:{INC: orderInc, DEC:orderDec},modulo:{INC:modulInc,DEC:modulDec}};
         INFO_FRACTIONS_ARMS.push(infoITEM);
         let angle0 ={per:0,par:0}; 
-        const anglePHI = orderInc.map(Y =>{
-          if((Y-1)===0){
+        const testPAR = new Set([...Array(1+INFO_FRACTIONS_TYPE[iX].GAP.END.PAR).keys()].slice(1));
+        const testPER = new Set([...Array(1+INFO_FRACTIONS_TYPE[iX].GAP.END.PER).keys()].slice(1));
+        const anglePHI = orderInc.map((incORD,iY) =>{
+          if((iY)===0){
             angle0.par = angle0.par + (((360/F)*(E+1))/2);
             angle0.per = angle0.per + (((360/F)*E)/2);
           }
+          const decORD = orderDec[iY];
+          const incMOD = modulInc[iY];
+          const decMOD = modulDec[iY];
           return {
-            PAR:A(angle0.par + (Y-1)*(360/F)),
-            PER:A(angle0.per + (Y-1)*(360/F))
+            PAR:{DEG:A(angle0.par + iY*(360/F)),TYP: iX ===0 ? "isGapEND":testPAR.has(decORD) ? "isGapEND" : incMOD===1 ? "isBitPAR" : "isGapMID"},
+            PER:{DEG:A(angle0.per + iY*(360/F)),TYP: (testPER.has(decORD) && iX !==0) ? "isGapEND" : (incMOD===1 || incMOD===2) ? "isBitPER" : "isGapMID"}
           }
         });
 
-
-
-
-        
         return anglePHI;
       })(
         [...new Array(FRACTIONS).keys()].map(K =>K+1),
@@ -323,12 +325,15 @@ export const TREE_SETING: ReadonlySignal<{
         //}
       };
     });
-    return {GEN:Q.GEN, END: Q.END, GAP: Q.GAP, HUE: Q.HUE, PLY: U, DEG:INFO_FRACTIONS_DEGS, BIT:INFO_FRACTIONS_TYPE, IDN:INFO_FRACTIONS_ARMS};
+    const REZULT = {GEN:Q.GEN, END: Q.END, GAP: Q.GAP, HUE: Q.HUE, PLY: U, 
+      DEG:INFO_FRACTIONS_DEGS, 
+      //BIT:INFO_FRACTIONS_TYPE, 
+      //IDN:INFO_FRACTIONS_ARMS
+    };
     //console.log(INFO_FRACTIONS_TYPE);
     //console.log(INFO_FRACTIONS_DEGS);
-    //console.log(INFO_FRACTIONS_ARMS);
-    //console.log(INFO_FRACTIONS);
-    
+    //console.log(REZULT);
+    return REZULT;
   })(TREE_SETING_0.value);
 });     
 

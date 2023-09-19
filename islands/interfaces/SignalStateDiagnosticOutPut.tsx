@@ -73,6 +73,31 @@ export function SignalStateDiagnosticOutPut(
           );
         })}
       </section>
+      {TREE_SETING.value.PLY.map((J,iJ) =>{
+        return(
+          <>          
+            <div class="h-[40px] w-full bg-black"></div>
+            <section class={`${classTailWind.section} grid grid-cols-4 gap-[5px] place-content-stretch box-border`}>
+              {TREE_SETING.value.PLY[iJ].PHI.map((H,iH)=>{
+                const tPa = TREE_SETING.value.PLY[iJ].PHI[iH].PAR.TYP;
+                const tPe = TREE_SETING.value.PLY[iJ].PHI[iH].PER.TYP;
+                const aPa = TREE_SETING.value.PLY[iJ].PHI[iH].PAR.DEG.toFixed(3);
+                const aPe = TREE_SETING.value.PLY[iJ].PHI[iH].PER.DEG.toFixed(3);
+                
+                const cPa = tPa=="isGapEND" ? TREE_SETING.value.HUE.G_E : tPa=="isGapMID" ? TREE_SETING.value.HUE.G_M : TREE_SETING.value.HUE.PAR;                
+                const cPe = tPe=="isGapEND" ? TREE_SETING.value.HUE.G_E : tPe=="isGapMID" ? TREE_SETING.value.HUE.G_M : TREE_SETING.value.HUE.PER;
+                return(<>
+                <div class={`bg-[${cPa}]`}>{aPa}</div>
+                <div class={`bg-[${cPa}]`}>{tPa}</div>
+                <div class={`bg-[${cPe}]`}>{tPe}</div>
+                <div class={`bg-[${cPe}]`}>{aPe}</div>
+                </>);
+              })}
+            </section>
+          </>
+        )
+      })}
+      <div class="h-[40px] w-full bg-black"></div>
       <section class={`${classTailWind.section}`}>C</section>
       <section class={`${classTailWind.section}`}>D</section>
       <section class={`${classTailWind.section}`}>E</section>
