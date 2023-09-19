@@ -21,63 +21,33 @@ import {
 
 
 export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
-  function V(a:boolean, c:number):number {
-    return a ? c : 0;
-  }
-  function W():number{
-    const arr=[   V(TREE_LAYERS.value.GEN > 0, TREE_LAYER1.value.sPE),
-                  V(TREE_LAYERS.value.GEN > 0, TREE_LAYER1.value.sPA),
-                  V(TREE_LAYERS.value.GEN > 1, TREE_LAYER2.value.sPE),
-                  V(TREE_LAYERS.value.GEN > 1, TREE_LAYER2.value.sPA),
-                  V(TREE_LAYERS.value.GEN > 2, TREE_LAYER3.value.sPE),
-                  V(TREE_LAYERS.value.GEN > 2, TREE_LAYER3.value.sPA),
-                  V(TREE_LAYERS.value.GEN > 3, TREE_LAYER4.value.sPE),
-                  V(TREE_LAYERS.value.GEN > 3, TREE_LAYER4.value.sPA),
-                  V(TREE_LAYERS.value.GEN > 4, TREE_LAYER5.value.sPE),
-                  V(TREE_LAYERS.value.GEN > 4, TREE_LAYER5.value.sPA),
-                  V(TREE_LAYERS.value.GEN > 5, TREE_LAYER6.value.sPE),
-                  V(TREE_LAYERS.value.GEN > 5, TREE_LAYER6.value.sPA),
-                  V(TREE_LAYERS.value.GEN > 6, TREE_LAYER7.value.sPE),
-                  V(TREE_LAYERS.value.GEN > 6, TREE_LAYER7.value.sPA)];
-      console.log(arr);
-    return arr.reduce((accumulator, currentValue) => accumulator + currentValue);
-
-  }
+  
   const handleOnInput_changeConfigCountLayers = event => {
     (TREE_LAYERS.value={...TREE_LAYERS.value, [event.target.name]: parseInt(event.target.value,10)});
-    //props.configTreeFractions.value = TreeFractionInit(props.layers.value);
   };  
   const handleOnInput_changeConfigTypesLayer0 = event => {
     (TREE_LAYER0.value={...TREE_LAYER0.value, [event.target.name]: (event.target.name!=="HUE"? parseInt(event.target.value,10) : event.target.value)});
-    //props.cofigCentLayers.value = W();
   };  
   const handleOnInput_changeConfigTypesLayer1 = event => {
     (TREE_LAYER1.value={...TREE_LAYER1.value, [event.target.name]: (event.target.name!=="HUE"? parseInt(event.target.value,10) : event.target.value)});
-   // props.cofigCentLayers.value = W();
   };  
   const handleOnInput_changeConfigTypesLayer2 = event => {
     (TREE_LAYER2.value={...TREE_LAYER2.value, [event.target.name]: (event.target.name!=="HUE"? parseInt(event.target.value,10) : event.target.value)});
-    //props.cofigCentLayers.value = W();
   };  
   const handleOnInput_changeConfigTypesLayer3 = event => {
     (TREE_LAYER3.value={...TREE_LAYER3.value, [event.target.name]: (event.target.name!=="HUE"? parseInt(event.target.value,10) : event.target.value)});
-    //props.cofigCentLayers.value = W();
   };  
   const handleOnInput_changeConfigTypesLayer4 = event => {
     (TREE_LAYER4.value={...TREE_LAYER4.value, [event.target.name]: (event.target.name!=="HUE"? parseInt(event.target.value,10) : event.target.value)});
-   // props.cofigCentLayers.value = W();
   };  
   const handleOnInput_changeConfigTypesLayer5 = event => {
     (TREE_LAYER5.value={...TREE_LAYER5.value, [event.target.name]: (event.target.name!=="HUE"? parseInt(event.target.value,10) : event.target.value)});
-   // props.cofigCentLayers.value = W();
   };  
   const handleOnInput_changeConfigTypesLayer6 = event => {
     (TREE_LAYER6.value={...TREE_LAYER6.value, [event.target.name]: (event.target.name!=="HUE"? parseInt(event.target.value,10) : event.target.value)});
-   // props.cofigCentLayers.value = W();
   };  
   const handleOnInput_changeConfigTypesLayer7 = event => {
     (TREE_LAYER7.value={...TREE_LAYER7.value, [event.target.name]: (event.target.name!=="HUE"? parseInt(event.target.value,10) : event.target.value)});
-    //props.cofigCentLayers.value = W();
   };
 
 

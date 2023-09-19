@@ -6,37 +6,16 @@ import type { SvgFractionTreePlotProps,initTreeFractionRhoOut } from "@@@types";
 
 
 import {
+  SVG_HALF, 
   TREE_RHO,  
   TREE_PHI
 } from "@@@globalCONTROLS";
 
 
 
-function layerX_PHI(nrGen:number, end:number, gap:number) {
-  const frPer_frEnd= (nrGen===0) ? 0 : end;
-  const frPar_frEnd= (nrGen===0) ? 1 : end+1;
-  const frPer_frGen= Math.floor(Math.pow(2,nrGen));
-  const frPar_frGen= Math.floor(Math.pow(2,nrGen-1));
-  const frPer_frGap=(nrGen===0 || nrGen===1) ? 0 : (frPar_frGen-1)*gap;
-  const frPar_frGap=(nrGen===0) ? 0 : frPar_frGen +frPer_frGap -1;
-  const fractions = (frPer_frGen+frPer_frGap+frPer_frEnd)==(frPar_frGen+frPar_frGap+frPar_frEnd) ? (frPar_frGen+frPar_frGap+frPar_frEnd) : 0;
-  
-  return {
-    fractionsPerson:{end:frPer_frEnd, gen:frPer_frGen, gap:frPer_frGap}, 
-    fractionsParent:{end:frPar_frEnd, gen:frPar_frGen, gap:frPar_frGap}, 
-    fractions: fractions
-  };
-}
-
 export function SvgFractionTreePlot(props: SvgFractionTreePlotProps) {
 
   
-  
-
-//const layer1_Phi = computed(() => {
-//  return layerX_PHI(1, props.layers.value.end, props.layers.value.gap);
-//});
-//effect(() => console.log(props.configTreeFractions.value));
 
   return (   
     <g>
@@ -55,12 +34,29 @@ export function SvgFractionTreePlot(props: SvgFractionTreePlotProps) {
             const I_INFO = ITEM.INFO;
             const I_DATA = ITEM.DATA;
             //console.log(Object.keys(ITEM.INFO));
+           // if(nrLAYER===1){
+              //console.log(I_INFO);
+            if(I_DATA.indexPAR !== null){
+              return (<line x="0" y1={(nrLAYER-1)<0?0:TREE_RHO.value[(nrLAYER-1)].rPE} y2={TREE_RHO.value[nrLAYER].rPA}
+                stroke={TREE_RHO.value[nrLAYER].HUE} stroke-width={80}
+                transform={`rotate(${L_INFO.itemsFra_PAR.angleFraZero}) rotate(${I_DATA.angleFra}) rotate(0)`}
+              />);
+            }
+           /// }
           })}</g>
           <g>{LAYER.DATA.PER.map((ITEM, nrITEM) => {
             const I_INFO = ITEM.INFO;
             const I_DATA = ITEM.DATA;
             //console.log(Object.keys(ITEM.INFO));
-
+            //if(nrLAYER===1){
+              //console.log(L_INFO);
+            if(I_DATA.indexPER !== null){
+              return (<line x="0" y1={TREE_RHO.value[nrLAYER].rPA} y2={TREE_RHO.value[nrLAYER].rPE} 
+                stroke={TREE_RHO.value[nrLAYER].HUE} stroke-width={80}
+                transform={`rotate(${L_INFO.itemsFra_PER.angleFraZero}) rotate(${I_DATA.angleFra}) rotate(0)`}
+              />);
+            }
+            //}
           })}</g>
         </>);
       })}
