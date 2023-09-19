@@ -17,7 +17,7 @@ export function FieldSetCol3(props: FieldSetCol3Props) {
     {...props}
     class={`${props.class} ${classTailWind.fieldset}`}
   >
-    <legend class={`${classTailWind.fieldset_legend}`}>(φ) {props.title}</legend>
+    <legend class={`${classTailWind.fieldset_legend}`}>{props.title}</legend>
       <form class={` ${classTailWind.fieldset_grid}`}>
         {props.children}
       </form>

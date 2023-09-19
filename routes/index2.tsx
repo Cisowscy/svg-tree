@@ -3,7 +3,7 @@ import { useSignal } from "@preact/signals";
 
 import Counter2 from "@@@templatesChangeABLE/Counter2.tsx";
 
-export default function Home() {
+export default function Home2() {
   const count2 = useSignal(3);
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">

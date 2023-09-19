@@ -1,23 +1,16 @@
 import type { SvgProps } from "@@@types";
+import  { 
+  SVG_SIZE,
+  SVG_TRIM,
+  SVG_CENT,
+  SVG_HALF,
+  SVG_VIEW,
+  SVG_DESK,
+  SVG_ZERO,
+  SVG_AREA
+} from "@@@globalCONTROLS";
 
-export const SVG_SIZE = 10000;
-const SVG_TRIM = 1;
-export const SVG_CENT = SVG_SIZE / 100;
-export const SVG_HALF = SVG_SIZE / 2;
-const SVG_VIEW = [-(SVG_TRIM * SVG_CENT), 2 * (SVG_TRIM * SVG_CENT) + SVG_SIZE];
-const SVG_DESK = {
-  viewBox: `${SVG_VIEW[0]} ${SVG_VIEW[0]} ${SVG_VIEW[1]} ${SVG_VIEW[1]}`,
-};
-export const SVG_ZERO = {
-  transform: `translate(${SVG_HALF} ${SVG_HALF}) rotate(180) scale (-1, 1)`,
-};
-const SVG_AREA = {
-  x: 0,
-  y: 0,
-  width: SVG_SIZE,
-  height: SVG_SIZE,
-  rx: SVG_CENT * 20,
-};
+
 const SVG_RECT = {
   VIEW: { strokeWidth: "10", stroke: "white", fill: "grey" },
   PLOT: { strokeWidth: "5", stroke: "black", fill: "white" },
@@ -52,42 +45,42 @@ export function Svg(props: SvgProps) {
             />
           </pattern>
         </defs>
-        {SVG_GRID_VISABLE && <rect {...SVG_AREA} fill="url(#gridS)" />}
-        {SVG_GRID_VISABLE && <rect {...SVG_AREA} fill="url(#gridM)" />}
+        {SVG_GRID_VISABLE && <rect {...SVG_AREA.value} fill="url(#gridS)" />}
+        {SVG_GRID_VISABLE && <rect {...SVG_AREA.value} fill="url(#gridM)" />}
       </g>
     );
   };
   const SVG_AXIS_VISABLE = true;
   const SVG_AXIS = () => {
-    const a = SVG_CENT * 2 / 6;
-    const b = SVG_CENT * 12 / 6;
-    const c = SVG_HALF - 2 * b;
+    const a = SVG_CENT.value * 2 / 6;
+    const b = SVG_CENT.value * 12 / 6;
+    const c = SVG_HALF.value - 2 * b;
     const a_plus_b = a + b;
     const b2_minus_1 = 2 * b - a;
     const d = 3 / 2 * b;
-    const e = SVG_HALF - b;
-    const f = SVG_HALF - b - 2 * a;
+    const e = SVG_HALF.value - b;
+    const f = SVG_HALF.value - b - 2 * a;
     const label = [
       {
         t: "X",
-        x: `${SVG_HALF - (SVG_CENT * 44 / 6)}`,
-        y: `-${(SVG_CENT * 16 / 6)}`,
+        x: `${SVG_HALF.value - (SVG_CENT.value * 44 / 6)}`,
+        y: `-${(SVG_CENT.value * 16 / 6)}`,
       },
       {
         t: "Y",
-        x: `${(SVG_CENT * 16 / 6)}`,
-        y: `-${SVG_HALF - (SVG_CENT * 44 / 6)}`,
+        x: `${(SVG_CENT.value * 16 / 6)}`,
+        y: `-${SVG_HALF.value - (SVG_CENT.value * 44 / 6)}`,
       },
       {
         t: "φ",
-        x: `-${SVG_HALF - (SVG_CENT * 16 / 6)}`,
-        y: `-${SVG_HALF / 2 - (SVG_CENT * 16 / 6)}`,
+        x: `-${SVG_HALF.value - (SVG_CENT.value * 16 / 6)}`,
+        y: `-${SVG_HALF.value / 2 - (SVG_CENT.value * 16 / 6)}`,
       },
     ];
     return (
       <>
         {SVG_AXIS_VISABLE && (
-          <g {...SVG_ZERO} opacity="25%" strokeWidth={`${(SVG_CENT * 1 / 6)}`}>
+          <g {...SVG_ZERO.value} opacity="25%" strokeWidth={`${(SVG_CENT.value * 1 / 6)}`}>
             <path
               stroke="DARKGREEN"
               fill="GREEN"
@@ -106,7 +99,7 @@ export function Svg(props: SvgProps) {
               fill="DARKGREEN"
               x={label[0].x}
               y={label[0].y}
-              fontSize={`${(SVG_CENT * 5)}`}
+              fontSize={`${(SVG_CENT.value * 5)}`}
               fontWeight="800"
               alignment-baseline="middle"
               text-anchor="middle"
@@ -132,7 +125,7 @@ export function Svg(props: SvgProps) {
               fill="DARKBLUE"
               x={label[1].x}
               y={label[1].y}
-              fontSize={`${(SVG_CENT * 5)}`}
+              fontSize={`${(SVG_CENT.value * 5)}`}
               fontWeight="800"
               alignment-baseline="middle"
               text-anchor="middle"
@@ -157,7 +150,7 @@ export function Svg(props: SvgProps) {
               fill="DARKRED"
               y={label[2].y}
               x={label[2].x}
-              fontSize={`${(SVG_CENT * 35 / 6)}`}
+              fontSize={`${(SVG_CENT.value * 35 / 6)}`}
               fontWeight="800"
               alignment-baseline="middle"
               text-anchor="middle"
@@ -175,14 +168,14 @@ export function Svg(props: SvgProps) {
   return (
     <svg
       {...props}
-      {...SVG_DESK}
+      {...SVG_DESK.value}
       class={`${props.class ?? ""}`}
       width={props.sizePX}
       height={props.sizePX}
     >
       {SVG_GRID()}
       {SVG_AXIS()}
-      <g {...SVG_ZERO}>
+      <g {...SVG_ZERO.value}>
         {props.children}
       </g>
     </svg>

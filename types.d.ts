@@ -67,14 +67,8 @@ export type ConfigLayerTypes = {
 };
 
 interface SvgFractionTreeConfigProps {
-  layers: Signal<ConfigLayerCount>;
-  layer1: Signal<ConfigLayerTypes>;
-  layer2: Signal<ConfigLayerTypes>;
-  layer3: Signal<ConfigLayerTypes>;
-  layer4: Signal<ConfigLayerTypes>;
-  layer5: Signal<ConfigLayerTypes>;
-  layer6: Signal<ConfigLayerTypes>;
-  layer7: Signal<ConfigLayerTypes>;
+  configTreeFractions: Signal<initTreeFractionRhoOut>;
+  cofigCentLayers: Signal<number>;
 }
 interface SvgProps extends JSX.SVGAttributes<SVGSVGElement> {
   class? : string;
@@ -82,7 +76,19 @@ interface SvgProps extends JSX.SVGAttributes<SVGSVGElement> {
   children: ComponentChildren;
 }
 interface SvgFractionTreePlotProps {
-  layers: Signal<ConfigLayerCount>;
+  configTreeFractions: Signal<initTreeFractionRhoOut>;
+  //layer1: Signal<ConfigLayerTypes>;
+  //layer2: Signal<ConfigLayerTypes>;
+  //layer3: Signal<ConfigLayerTypes>;
+  //layer4: Signal<ConfigLayerTypes>;
+  //layer5: Signal<ConfigLayerTypes>;
+  //layer6: Signal<ConfigLayerTypes>;
+  //layer7: Signal<ConfigLayerTypes>;
+}
+
+interface SignalStateDiagnosticOutPutProps {
+  configTreeFractions: Signal<initTreeFractionRhoOut>;
+  layer0: Signal<ConfigLayerTypes>;
   layer1: Signal<ConfigLayerTypes>;
   layer2: Signal<ConfigLayerTypes>;
   layer3: Signal<ConfigLayerTypes>;
@@ -90,6 +96,7 @@ interface SvgFractionTreePlotProps {
   layer5: Signal<ConfigLayerTypes>;
   layer6: Signal<ConfigLayerTypes>;
   layer7: Signal<ConfigLayerTypes>;
+  cofigCentLayers: Signal<number>;
 }
 
 
