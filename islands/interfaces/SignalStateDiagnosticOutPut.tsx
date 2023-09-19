@@ -3,16 +3,7 @@
 import type { SignalStateDiagnosticOutPutProps } from "@@@types";
 
 import {
-  TREE_LAYER0,
-  TREE_LAYER1,
-  TREE_LAYER2,
-  TREE_LAYER3,
-  TREE_LAYER4,
-  TREE_LAYER5,
-  TREE_LAYER6,
-  TREE_LAYER7,
-  TREE_LAYERS,
-  TREE_RHO,
+  TREE_SETING,
 } from "@@@globalCONTROLS";
 
 export function SignalStateDiagnosticOutPut(
@@ -46,13 +37,13 @@ export function SignalStateDiagnosticOutPut(
         <p class={`bg-blue-700/50 rounded-t-md`}>odstęp środkowy</p>
         <p class={`bg-blue-700/50 rounded-l-md`}>WARTOŚĆ:</p>
         <p class={`bg-blue-500/50 rounded-b-md  text-center`}>
-          {TREE_LAYERS.value.GEN}
+          {TREE_SETING.value.GEN}
         </p>
         <p class={`bg-blue-500/50 rounded-b-md  text-center`}>
-          {TREE_LAYERS.value.END}
+          {TREE_SETING.value.END}
         </p>
         <p class={`bg-blue-500/50 rounded-b-md  text-center`}>
-          {TREE_LAYERS.value.GAP}
+          {TREE_SETING.value.GAP}
         </p>
       </section>
       <section
@@ -63,21 +54,21 @@ export function SignalStateDiagnosticOutPut(
         <div class={`bg-black/90 text-white rounded-md`}>-</div>
         <div class={`bg-black/90 text-white rounded-md`}>-</div>
 
-        {TREE_RHO.value.map((X, I) => {
+        {TREE_SETING.value.HUE.PLY.map((HUE, I) => {
           return (
             <>
-              <div class={`bg-[${X.HUE}]/50 rounded-md`}>{`φ-${I}-PA`}</div>
-              <div class={`bg-[${X.HUE}]/50 rounded-md`}>
-                {X.rPA.toFixed(3)}
+              <div class={`bg-[${HUE}]/50 rounded-md`}>{`φ-${I}-PA`}</div>
+              <div class={`bg-[${HUE}]/50 rounded-md`}>
+                {TREE_SETING.value.PLY[I].RHO.PAR[1].toFixed(3)}
               </div>
-              <div class={`bg-[${X.HUE}]/50 rounded-md`}>-</div>
-              <div class={`bg-[${X.HUE}]/50 rounded-md`}>-</div>
-              <div class={`bg-[${X.HUE}]/90 rounded-md`}>{`φ-${I}-PE`}</div>
-              <div class={`bg-[${X.HUE}]/90 rounded-md`}>
-                {X.rPE.toFixed(3)}
+              <div class={`bg-[${HUE}]/50 rounded-md`}>-</div>
+              <div class={`bg-[${HUE}]/50 rounded-md`}>-</div>
+              <div class={`bg-[${HUE}]/90 rounded-md`}>{`φ-${I}-PE`}</div>
+              <div class={`bg-[${HUE}]/90 rounded-md`}>
+                {TREE_SETING.value.PLY[I].RHO.PER[1].toFixed(3)}
               </div>
-              <div class={`bg-[${X.HUE}]/90 rounded-md`}>-</div>
-              <div class={`bg-[${X.HUE}]/90 rounded-md`}>-</div>
+              <div class={`bg-[${HUE}]/90 rounded-md`}>-</div>
+              <div class={`bg-[${HUE}]/90 rounded-md`}>-</div>
             </>
           );
         })}

@@ -46,4 +46,5 @@
   "vscode-edge-devtools.showWorkers": true,
   "vscode-edge-devtools.webRoot": "${workspaceFolder}/dev.ts",
   "vscode-edge-devtools.port": 7490,
+  "browserConsole.port": 8000,
 }

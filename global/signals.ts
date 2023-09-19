@@ -50,71 +50,289 @@ export const SVG_AREA: ReadonlySignal<{
 
 //^ KONTROLA DRZEWA - ZASADNICZA
 
-export const TREE_LAYERS: Signal<{ GEN: number; END: number; GAP: number }> =
-  signal({ GEN: 7, END: 9, GAP: 9 });
-export const TREE_LAYER0: Signal<{ sPE: number; HUE: string; sPA: number }> =
-  signal({ sPE: 2, HUE: "#cac158", sPA: 1 });
-export const TREE_LAYER1: Signal<{ sPE: number; HUE: string; sPA: number }> =
-  signal({ sPE: 2, HUE: "#ef9f2f", sPA: 1 });
-export const TREE_LAYER2: Signal<{ sPE: number; HUE: string; sPA: number }> =
-  signal({ sPE: 2, HUE: "#ef5fcf", sPA: 1 });
-export const TREE_LAYER3: Signal<{ sPE: number; HUE: string; sPA: number }> =
-  signal({ sPE: 2, HUE: "#9f5fef", sPA: 1 });
-export const TREE_LAYER4: Signal<{ sPE: number; HUE: string; sPA: number }> =
-  signal({ sPE: 2, HUE: "#1fafdf", sPA: 1 });
-export const TREE_LAYER5: Signal<{ sPE: number; HUE: string; sPA: number }> =
-  signal({ sPE: 2, HUE: "#8fdf4f", sPA: 1 });
-export const TREE_LAYER6: Signal<{ sPE: number; HUE: string; sPA: number }> =
-  signal({ sPE: 2, HUE: "#efdf4f", sPA: 1 });
-export const TREE_LAYER7: Signal<{ sPE: number; HUE: string; sPA: number }> =
-  signal({ sPE: 2, HUE: "#afaf8f", sPA: 1 });
-//export const TREE_LAYER8: Signal<{ SPE: number; HUE: string; SPA: number }> = signal({ SPE: 2, HUE: "#fe01ba", SPA: 1 });
-//export const TREE_LAYER9: Signal<{ SPE: number; HUE: string; SPA: number }> = signal({ SPE: 2, HUE: "#fe01ba", SPA: 1 });
-
-//^ KONTROLA DRZEWA - POCHODNA
-
-export const TREE_RHO_CENT: ReadonlySignal<number> = computed(() => {
-  return SVG_HALF.value / [
-    TREE_LAYER0.value,
-    TREE_LAYER1.value,
-    TREE_LAYER2.value,
-    TREE_LAYER3.value,
-    TREE_LAYER4.value,
-    TREE_LAYER5.value,
-    TREE_LAYER6.value,
-    TREE_LAYER7.value,
-  ].toSpliced(1 + TREE_LAYERS.value.GEN).map((x) => x.sPE + x.sPA).reduce((
-    a,
-    b,
-  ) => a + b);
+export const TREE_LAYERS: Signal<{ 
+  GEN: number; END: number; GAP: number; 
+  huePA: string; huePE: string; hueGE: string; hueGM: string;
+  gen0sPA:number; gen0HUE: string; gen0sPE:number;
+  gen1sPA:number; gen1HUE: string; gen1sPE:number;
+  gen2sPA:number; gen2HUE: string; gen2sPE:number;
+  gen3sPA:number; gen3HUE: string; gen3sPE:number;
+  gen4sPA:number; gen4HUE: string; gen4sPE:number;
+  gen5sPA:number; gen5HUE: string; gen5sPE:number;
+  gen6sPA:number; gen6HUE: string; gen6sPE:number;
+  gen7sPA:number; gen7HUE: string; gen7sPE:number;
+}> = signal({ 
+  GEN: 7, END: 9, GAP: 9, 
+  huePA:"#826c48", huePE:"#558248", hueGE:"#824e79", hueGM: "#486682",
+  gen0sPA:2, gen0HUE: "#cac158", gen0sPE:1,
+  gen1sPA:2, gen1HUE: "#ef9f2f", gen1sPE:1,
+  gen2sPA:2, gen2HUE: "#ef5fcf", gen2sPE:1,
+  gen3sPA:2, gen3HUE: "#9f5fef", gen3sPE:1,
+  gen4sPA:2, gen4HUE: "#1fafdf", gen4sPE:1,
+  gen5sPA:2, gen5HUE: "#8fdf4f", gen5sPE:1,
+  gen6sPA:2, gen6HUE: "#efdf4f", gen6sPE:1,
+  gen7sPA:2, gen7HUE: "#afaf8f", gen7sPE:1
 });
-export const TREE_RHO: ReadonlySignal<{
+//^ KONTROLA DRZEWA - POCHODNA
+const TREE_PLY_s: ReadonlySignal<{
+  sPA: number;
+  HUE: string;
+  sPE: number;
+}[]> = computed(()=>{
+  return [
+    {sPA: TREE_LAYERS.value.gen0sPA , HUE: TREE_LAYERS.value.gen0HUE , sPE: TREE_LAYERS.value.gen0sPE },    
+    {sPA: TREE_LAYERS.value.gen1sPA , HUE: TREE_LAYERS.value.gen1HUE , sPE: TREE_LAYERS.value.gen1sPE },
+    {sPA: TREE_LAYERS.value.gen2sPA , HUE: TREE_LAYERS.value.gen2HUE , sPE: TREE_LAYERS.value.gen2sPE },
+    {sPA: TREE_LAYERS.value.gen3sPA , HUE: TREE_LAYERS.value.gen3HUE , sPE: TREE_LAYERS.value.gen3sPE },
+    {sPA: TREE_LAYERS.value.gen4sPA , HUE: TREE_LAYERS.value.gen4HUE , sPE: TREE_LAYERS.value.gen4sPE },
+    {sPA: TREE_LAYERS.value.gen5sPA , HUE: TREE_LAYERS.value.gen5HUE , sPE: TREE_LAYERS.value.gen5sPE },
+    {sPA: TREE_LAYERS.value.gen6sPA , HUE: TREE_LAYERS.value.gen6HUE , sPE: TREE_LAYERS.value.gen6sPE },
+    {sPA: TREE_LAYERS.value.gen7sPA , HUE: TREE_LAYERS.value.gen7HUE , sPE: TREE_LAYERS.value.gen7sPE }
+  ].toSpliced(1 + TREE_LAYERS.value.GEN);
+});
+export const TREE_RHO_CENT: ReadonlySignal<number> = computed(() => (SVG_HALF.value / TREE_PLY_s.value.map((x) => x.sPE + x.sPA).reduce((a,b) => a + b)));
+const TREE_PLY_r: ReadonlySignal<{
   rPE: number;
   rPA: number;
+  sPA: number;
   HUE: string;
-}[]> = computed(() => {
+  sPE: number;
+}[]> = computed(()=>{
   let r = 0;
-  return [
-    TREE_LAYER0.value,
-    TREE_LAYER1.value,
-    TREE_LAYER2.value,
-    TREE_LAYER3.value,
-    TREE_LAYER4.value,
-    TREE_LAYER5.value,
-    TREE_LAYER6.value,
-    TREE_LAYER7.value,
-  ].toSpliced(1 + TREE_LAYERS.value.GEN).map((x) => {
+  return TREE_PLY_s.value.map((x) => {
     r = r + (TREE_RHO_CENT.value * x.sPA);
     const rPARENT = r;
     r = r + (TREE_RHO_CENT.value * x.sPE);
     const rPERSON = r;
     return {
+      ...x,
       rPE: rPERSON,
       rPA: rPARENT,
-      HUE: x.HUE,
     };
   });
 });
+
+const TREE_SETING_0: ReadonlySignal<{
+  GEN: number;
+  END: number;
+  GAP: number;
+  HUE: {
+      PAR: string;
+      PER: string;
+      G_E: string;
+      G_M: string;
+      PLY: string[];
+  };
+  PLY: {
+      RHO:{
+        PAR: number[];
+        PER: number[];
+      }
+  }[];
+}> = computed(()=>{
+  return {
+    GEN: TREE_LAYERS.value.GEN,
+    END: TREE_LAYERS.value.END,
+    GAP: TREE_LAYERS.value.GAP,
+    HUE: {
+      PAR: TREE_LAYERS.value.huePA,
+      PER: TREE_LAYERS.value.huePE,
+      G_E: TREE_LAYERS.value.hueGE, 
+      G_M: TREE_LAYERS.value.hueGM,
+      PLY: TREE_PLY_s.value.map((x) => x.HUE)      
+    },
+    PLY: TREE_PLY_r.value.map((x,i) => {
+      const a = (i-1)<0 ? 0 : TREE_PLY_r.value[i-1].rPE;
+      const b = (i+1)>TREE_LAYERS.value.GEN ? SVG_HALF.value : TREE_PLY_r.value[i+1].rPA;
+
+      return {RHO:{
+        PAR:[a,x.rPA,x.rPE],
+        PER:[x.rPA,x.rPE,b] 
+      }};
+    })
+  }
+});
+
+export const TREE_SETING: ReadonlySignal<{
+  GEN: number;
+  END: number;
+  GAP: number;
+  HUE: {
+      PAR: string;
+      PER: string;
+      G_E: string;
+      G_M: string;
+      PLY: string[];
+  };
+  PLY: {
+      PHI: {
+          PAR: number;
+          PER: number;
+      }[];
+      RHO: {
+          PAR: number[];
+          PER: number[];
+      };
+  }[];
+  DEG: {
+      ZERO: {
+          PAR: number;
+          PER: number;
+      };
+      STEP: number;
+  }[];
+  BIT: {
+      GAP: {
+          END: {
+              PER: number;
+              PAR: number;
+          };
+          MID: {
+              PER: number;
+              PAR: number;
+          };
+      };
+      GEN: {
+          NUM: number;
+          BIT: {
+              PER: number;
+              PAR: number;
+          };
+      };
+      SUM: number;
+  }[];
+  IDN: {
+      order: {
+          INC: number[];
+          DEC: number[];
+      };
+      modulo: {
+          INC: number[];
+          DEC: number[];
+      };
+  }[];
+}> = computed(()=>{
+  return ((Q)=>{
+    function A(D:number):number {
+      while (D>=360) {
+        D = D -360;
+      }
+      return D;
+    }
+    //console.log(Q);
+    const INFO_FRACTIONS_TYPE: {
+      GAP: {
+          END: {
+              PER: number;
+              PAR: number;
+          };
+          MID: {
+              PER: number;
+              PAR: number;
+          };
+      };
+      GEN: {
+          NUM: number;
+          BIT: {
+              PER: number;
+              PAR: number;
+          };
+      };
+      SUM: number;
+  }[] = [];
+    const INFO_FRACTIONS_DEGS: {
+      ZERO: {
+          PAR: number;
+          PER: number;
+      };
+      STEP: number;
+  }[] = [];
+    const INFO_FRACTIONS_ARMS: {
+      order: {
+          INC: number[];
+          DEC: number[];
+      };
+      modulo: {
+          INC: number[];
+          DEC: number[];
+      };
+  }[] = [];
+    const U = Q.PLY.map((X,iX) => {
+      //console.log("-".repeat(20));
+      const R = (() =>{      
+        const gapEND = {
+          PER: (iX === 0) ? 0 : Q.END,
+          PAR: (iX === 0) ? 1 : Q.END + 1
+        };
+        const genNUM = iX;
+        const genBIT = {
+          PER: Math.floor(Math.pow(2, iX)),
+          PAR: Math.floor(Math.pow(2, iX - 1))
+        };
+        const gapMID = {
+          PER: ((iX === 0 || iX === 1) ? 0 : (genBIT.PAR - 1) * Q.GAP),
+          PAR: (iX === 0) ? 0 : genBIT.PAR + ((iX === 0 || iX === 1) ? 0 : (genBIT.PAR - 1) * Q.GAP) - 1
+        };     
+        const FRA = (gapEND.PAR + gapMID.PAR + genBIT.PAR) == (gapEND.PER + gapMID.PER + genBIT.PER) ? (gapEND.PER + gapMID.PER + genBIT.PER) : 0; 
+        return {GAP:{END:gapEND,MID:gapMID},GEN:{NUM:genNUM,BIT:genBIT},SUM:FRA};
+      })();
+      INFO_FRACTIONS_TYPE.push(R);
+      const FRACTIONS = (R.GAP.END.PAR + R.GAP.MID.PAR + R.GEN.BIT.PAR) == (R.GAP.END.PER + R.GAP.MID.PER + R.GEN.BIT.PER) ? (R.GAP.END.PER + R.GAP.MID.PER + R.GEN.BIT.PER) : 0;
+      const PHI_DEG = {
+        ZERO: {
+          PAR:A(((360/FRACTIONS)*(Q.END+1))/2),
+          PER:A(((360/FRACTIONS)*Q.END)/2)
+        },
+        STEP:A(360/FRACTIONS)
+      };
+      INFO_FRACTIONS_DEGS.push(PHI_DEG);
+      const PHI_VEC = ((orderInc,M,F,E)=>{
+        const orderDec = orderInc.toReversed();
+        const modulInc = orderInc.map(K =>K%M);
+        const modulDec = orderDec.map(K =>K%M);
+        const infoITEM = {order:{INC: orderInc, DEC:orderDec},modulo:{INC:modulInc,DEC:modulDec}};
+        INFO_FRACTIONS_ARMS.push(infoITEM);
+        let angle0 ={per:0,par:0}; 
+        const anglePHI = orderInc.map(Y =>{
+          if((Y-1)===0){
+            angle0.par = angle0.par + (((360/F)*(E+1))/2);
+            angle0.per = angle0.per + (((360/F)*E)/2);
+          }
+          return {
+            PAR:A(angle0.par + (Y-1)*(360/F)),
+            PER:A(angle0.per + (Y-1)*(360/F))
+          }
+        });
+
+
+
+
+        
+        return anglePHI;
+      })(
+        [...new Array(FRACTIONS).keys()].map(K =>K+1),
+        Q.GAP+2,
+        FRACTIONS,
+        Q.END
+      );
+      return {
+        ...X,
+        //PIP:
+        //ARM: {
+          PHI:PHI_VEC
+        //}
+      };
+    });
+    return {GEN:Q.GEN, END: Q.END, GAP: Q.GAP, HUE: Q.HUE, PLY: U, DEG:INFO_FRACTIONS_DEGS, BIT:INFO_FRACTIONS_TYPE, IDN:INFO_FRACTIONS_ARMS};
+    //console.log(INFO_FRACTIONS_TYPE);
+    //console.log(INFO_FRACTIONS_DEGS);
+    //console.log(INFO_FRACTIONS_ARMS);
+    //console.log(INFO_FRACTIONS);
+    
+  })(TREE_SETING_0.value);
+});     
+
+//-----------------------------------------------------------------------------------------------------------------------------
 export const TREE_PHI = computed(()=>{
   let idPER =0;
   let idPAR =0;
@@ -131,9 +349,14 @@ export const TREE_PHI = computed(()=>{
         (frPar_frGen + frPar_frGap + frPar_frEnd)
       ? (frPar_frGen + frPar_frGap + frPar_frEnd)
       : 0;
+
+
+
+
     const Fraction = (nrFRA:number,PerOrPar:string) => {
       const indexFraInc = [...new Array(fractionSUM).keys()].map(K =>K+1);
       const indexFraDec = indexFraInc.toReversed();
+
       const indexFraIncMod = indexFraInc.map(K =>K%(2+TREE_LAYERS.value.GAP));
       const indexFraDecMod = indexFraDec.map(K =>K%(2+TREE_LAYERS.value.GAP));
       let angle0 ={per:0,par:0}; 

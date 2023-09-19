@@ -7,6 +7,7 @@ import type { SvgFractionTreePlotProps,initTreeFractionRhoOut } from "@@@types";
 
 import {
   SVG_HALF, 
+  TREE_SETING,
   TREE_RHO,  
   TREE_PHI
 } from "@@@globalCONTROLS";
@@ -19,15 +20,16 @@ export function SvgFractionTreePlot(props: SvgFractionTreePlotProps) {
 
   return (   
     <g>
-      {TREE_RHO.value.map((Layer, nrLayer) =>{
+      {TREE_SETING.value.PLY.map((X, iX) =>{
+        const HUE = TREE_SETING.value.HUE.PLY[iX];
             return(
               <>
-                <circle cx="0" cy="0" fill="none" stroke-width="50" stroke={`${Layer.HUE}`} r={`${Layer.rPA.toFixed(3)}`} />
-                <circle cx="0" cy="0" fill="none" stroke-width="50" stroke={`${Layer.HUE}`} r={`${Layer.rPE.toFixed(3)}`} />
+                <circle cx="0" cy="0" fill="none" stroke-width="50" stroke={`${HUE}`} r={`${X.RHO.PAR[1].toFixed(3)}`} />
+                <circle cx="0" cy="0" fill="none" stroke-width="50" stroke={`${HUE}`} r={`${X.RHO.PER[1].toFixed(3)}`} />
               </>
             );
         })}
-      {TREE_PHI.value.map((LAYER, nrLAYER) =>{
+      {/*TREE_PHI.value.map((LAYER, nrLAYER) =>{
         const L_INFO = LAYER.INFO;
         return(<>
           <g>{LAYER.DATA.PAR.map((ITEM, nrITEM) => {
@@ -59,7 +61,7 @@ export function SvgFractionTreePlot(props: SvgFractionTreePlotProps) {
             //}
           })}</g>
         </>);
-      })}
+      })*/}
     </g>
   );
 }
