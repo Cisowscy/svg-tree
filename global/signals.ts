@@ -403,7 +403,7 @@ export const TREE_LAYERS: Signal<{
   gen7sPA:1, gen7HUE: "#afaf8f", gen7sPE:3
 });
 //^ KONTROLA DRZEWA - POCHODNA
-const SETING_SVG_TREE = computed(()=>{
+export const SETING_SVG_TREE = computed(()=>{
   return FunctionMakeSeting(TREE_LAYERS.value, SVG_HALF.value);
 });
 

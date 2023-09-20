@@ -4,6 +4,7 @@ import type { SignalStateDiagnosticOutPutProps } from "@@@types";
 
 import {
   TREE_SETING,
+  SETING_SVG_TREE
 } from "@@@globalCONTROLS";
 
 export function SignalStateDiagnosticOutPut(
@@ -33,71 +34,81 @@ export function SignalStateDiagnosticOutPut(
       >
         <p class={`bg-blue-700/50 rounded-l-md`}>NAZWA:</p>
         <p class={`bg-blue-700/50 rounded-t-md`}>ilość pokoleń</p>
+        <p class={`bg-blue-700/50 rounded-t-md`}>odstęp pomiędzy</p>
         <p class={`bg-blue-700/50 rounded-t-md`}>odstęp końcowy</p>
-        <p class={`bg-blue-700/50 rounded-t-md`}>odstęp środkowy</p>
         <p class={`bg-blue-700/50 rounded-l-md`}>WARTOŚĆ:</p>
         <p class={`bg-blue-500/50 rounded-b-md  text-center`}>
-          {TREE_SETING.value.GEN}
+          {SETING_SVG_TREE.value.set.ply}
         </p>
         <p class={`bg-blue-500/50 rounded-b-md  text-center`}>
-          {TREE_SETING.value.END}
+          {SETING_SVG_TREE.value.set.mid}
         </p>
         <p class={`bg-blue-500/50 rounded-b-md  text-center`}>
-          {TREE_SETING.value.GAP}
+          {SETING_SVG_TREE.value.set.end}
         </p>
       </section>
-      <section
-        class={`mb-4 grid grid-cols-6 gap-[5px] place-content-stretch box-border`}
-      >
-        <div class={`bg-black/90 text-white rounded-md`}>powłoka</div>
-        <div class={`bg-black/90 text-white rounded-md`}>promień</div>
-        <div class={`bg-black/90 text-white rounded-md`}>frakcje</div>
-        <div class={`bg-black/90 text-white rounded-md`}>gapEND</div>
-        <div class={`bg-black/90 text-white rounded-md`}>gapMID</div>
-        <div class={`bg-black/90 text-white rounded-md`}>bitPER / bitPAR</div>
+      <section>
+        <table class="table-auto border-separate border border-slate-400">
+          <thead>
+            <tr>
+              <th scope="col"class={`w-[125px] bg-black/90 text-white rounded-md`}>powłoka</th>
+              <th scope="col"class={`w-[80px] bg-black/90 text-white rounded-md`}>promień</th>
+              <th scope="col"class={`bg-black/90 text-white rounded-md`}>frakc.</th>
+              <th scope="col"class={`bg-black/90 text-white rounded-md`}>frGen</th>
+              <th scope="col"class={`bg-black/90 text-white rounded-md`}>frEnd</th>
+              <th scope="col"class={`bg-black/90 text-white rounded-md`}>frMid</th>
+              <th scope="col"class={`bg-black/90 text-white rounded-md`}>xor</th>
+              <th scope="col"class={`bg-black/90 text-white rounded-md`}>fix</th>
+              <th scope="col"class={`bg-black/90 text-white rounded-md`}>xor</th>
+              <th scope="col"class={`bg-black/90 text-white rounded-md`}>mid/2</th>
+              <th scope="col"class={`bg-black/90 text-white rounded-md`}>deg zero</th>
+              <th scope="col"class={`bg-black/90 text-white rounded-md`}>deg step</th>
+            </tr>
+          </thead>
+          <tbody>
+            {SETING_SVG_TREE.value.ply.map(L =>{
+              const HUE = L.typ == "PA" 
+                                ? `bg-[${SETING_SVG_TREE.value.hue.ply[L.iPe]}]/50 rounded-md`
+                                : `bg-[${SETING_SVG_TREE.value.hue.ply[L.iPe]}]/90 rounded-md`;
 
-        {TREE_SETING.value.HUE.PLY.map((HUE, I) => {
-          return (
-            <>
-              <div class={`bg-[${HUE}]/50 rounded-md`}>{`φ-${I}-PA`}</div>
-              <div class={`bg-[${HUE}]/50 rounded-md`}>
-                {TREE_SETING.value.PLY[I].RHO.PAR[1].toFixed(3)}
-              </div>
-              <div class={`bg-[${HUE}]/50 rounded-md`}>
-                {TREE_SETING.value.BIT[I].SUM}
-              </div>
-              <div class={`bg-[${HUE}]/50 rounded-md`}>
-                {TREE_SETING.value.BIT[I].GAP.END.PAR}
-              </div>
-              <div class={`bg-[${HUE}]/50 rounded-md`}>
-                {TREE_SETING.value.BIT[I].GAP.MID.PAR}
-              </div>
-              <div class={`bg-[${HUE}]/50 rounded-md`}>
-                {TREE_SETING.value.BIT[I].GEN.BIT.PAR}
-              </div>
-
-
-              <div class={`bg-[${HUE}]/90 rounded-md`}>{`φ-${I}-PE`}</div>
-              <div class={`bg-[${HUE}]/90 rounded-md`}>
-                {TREE_SETING.value.PLY[I].RHO.PER[1].toFixed(3)}
-              </div>
-              <div class={`bg-[${HUE}]/90 rounded-md`}>
-                {TREE_SETING.value.BIT[I].SUM}
-              </div>
-              <div class={`bg-[${HUE}]/90 rounded-md`}>
-                {TREE_SETING.value.BIT[I].GAP.END.PER}
-              </div>
-              <div class={`bg-[${HUE}]/90 rounded-md`}>
-                {TREE_SETING.value.BIT[I].GAP.MID.PAR}
-              </div>
-              <div class={`bg-[${HUE}]/90 rounded-md`}>
-                {TREE_SETING.value.BIT[I].GEN.BIT.PAR}
-              </div>
-            </>
-          );
-        })}
+              return(
+                <tr>
+                  <th scope="row" class={`bg-black/90 text-white rounded-md`}>{`${L._nr.toString().padEnd(2,' ')}|ρ${L.typ}|${L.iPe}|${L.iPa.toString().padStart(2,' ')}|${L.idn.toString().padStart(2,' ')}|`}</th> 
+                  <td class={HUE}>{L.ply[1].toFixed(3)}</td>
+                  <td class={HUE}>{L.bit.sum}</td>
+                  <td class={HUE}>{L.bit.gen}</td>
+                  <td class={HUE}>{L.bit.gen}</td>
+                  <td class={HUE}>{L.bit.mid}</td>   
+                  <td class={HUE}>{L.xor}</td>      
+                  <td class={HUE}>{L.fix}</td>       
+                  <td class={HUE}>{L.xor}</td>      
+                  <td class={HUE}>{L.mid}</td>       
+                  <td class={HUE}>{L.deg.zero.toFixed(3)}</td>       
+                  <td class={HUE}>{L.deg.step.toFixed(3)}</td>            
+                </tr>
+              )
+            })}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+              <td class={`bg-black/90 text-white rounded-md`}> . </td>
+            </tr>
+          </tfoot>
+        </table>
       </section>
-      {TREE_SETING.value.PLY.map((J,iJ) =>{
+      
+      {/*TREE_SETING.value.PLY.map((J,iJ) =>{
         return(
           <>          
             <div class="h-[40px] w-full bg-black"></div>
@@ -120,7 +131,7 @@ export function SignalStateDiagnosticOutPut(
             </section>
           </>
         )
-      })}
+      })*/}
       <div class="h-[40px] w-full bg-black"></div>
       <section class={`${classTailWind.section}`}>C</section>
       <section class={`${classTailWind.section}`}>D</section>
