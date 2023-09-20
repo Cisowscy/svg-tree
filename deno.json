@@ -53,7 +53,7 @@
     "twind1-preset-autoprefix": "https://esm.sh/@twind/preset-autoprefix@1.0.7",
     "twind1-preset-tailwind": "https://esm.sh/@twind/preset-tailwind@1.1.4",
     "twind1_fresh_plugin/": "https://deno.land/x/fresh_twindv1_plugin@v1.3.0/",
-    "$std/": "https://deno.land/std@0.201.0/",
+    "$std/": "https://deno.land/std@0.202.0/",
     "preact-heroicons": "https://esm.sh/preact-heroicons@2.0.18",
     "preact-heroicons/": "https://esm.sh/preact-heroicons@2.0.18/",
     "@headlessui/react": "https://esm.sh/@headlessui/react@1.7.17?alias=react:preact/compat,react-dom:preact/compat,@types/react:preact/compat&deps=preact@10.17.1"

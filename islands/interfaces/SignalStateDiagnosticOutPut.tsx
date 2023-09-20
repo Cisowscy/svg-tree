@@ -47,12 +47,14 @@ export function SignalStateDiagnosticOutPut(
         </p>
       </section>
       <section
-        class={`mb-4 grid grid-cols-4 gap-[5px] place-content-stretch box-border`}
+        class={`mb-4 grid grid-cols-6 gap-[5px] place-content-stretch box-border`}
       >
         <div class={`bg-black/90 text-white rounded-md`}>powłoka</div>
         <div class={`bg-black/90 text-white rounded-md`}>promień</div>
-        <div class={`bg-black/90 text-white rounded-md`}>-</div>
-        <div class={`bg-black/90 text-white rounded-md`}>-</div>
+        <div class={`bg-black/90 text-white rounded-md`}>frakcje</div>
+        <div class={`bg-black/90 text-white rounded-md`}>gapEND</div>
+        <div class={`bg-black/90 text-white rounded-md`}>gapMID</div>
+        <div class={`bg-black/90 text-white rounded-md`}>bitPER / bitPAR</div>
 
         {TREE_SETING.value.HUE.PLY.map((HUE, I) => {
           return (
@@ -61,14 +63,36 @@ export function SignalStateDiagnosticOutPut(
               <div class={`bg-[${HUE}]/50 rounded-md`}>
                 {TREE_SETING.value.PLY[I].RHO.PAR[1].toFixed(3)}
               </div>
-              <div class={`bg-[${HUE}]/50 rounded-md`}>-</div>
-              <div class={`bg-[${HUE}]/50 rounded-md`}>-</div>
+              <div class={`bg-[${HUE}]/50 rounded-md`}>
+                {TREE_SETING.value.BIT[I].SUM}
+              </div>
+              <div class={`bg-[${HUE}]/50 rounded-md`}>
+                {TREE_SETING.value.BIT[I].GAP.END.PAR}
+              </div>
+              <div class={`bg-[${HUE}]/50 rounded-md`}>
+                {TREE_SETING.value.BIT[I].GAP.MID.PAR}
+              </div>
+              <div class={`bg-[${HUE}]/50 rounded-md`}>
+                {TREE_SETING.value.BIT[I].GEN.BIT.PAR}
+              </div>
+
+
               <div class={`bg-[${HUE}]/90 rounded-md`}>{`φ-${I}-PE`}</div>
               <div class={`bg-[${HUE}]/90 rounded-md`}>
                 {TREE_SETING.value.PLY[I].RHO.PER[1].toFixed(3)}
               </div>
-              <div class={`bg-[${HUE}]/90 rounded-md`}>-</div>
-              <div class={`bg-[${HUE}]/90 rounded-md`}>-</div>
+              <div class={`bg-[${HUE}]/90 rounded-md`}>
+                {TREE_SETING.value.BIT[I].SUM}
+              </div>
+              <div class={`bg-[${HUE}]/90 rounded-md`}>
+                {TREE_SETING.value.BIT[I].GAP.END.PER}
+              </div>
+              <div class={`bg-[${HUE}]/90 rounded-md`}>
+                {TREE_SETING.value.BIT[I].GAP.MID.PAR}
+              </div>
+              <div class={`bg-[${HUE}]/90 rounded-md`}>
+                {TREE_SETING.value.BIT[I].GEN.BIT.PAR}
+              </div>
             </>
           );
         })}
@@ -79,18 +103,18 @@ export function SignalStateDiagnosticOutPut(
             <div class="h-[40px] w-full bg-black"></div>
             <section class={`${classTailWind.section} grid grid-cols-4 gap-[5px] place-content-stretch box-border`}>
               {TREE_SETING.value.PLY[iJ].PHI.map((H,iH)=>{
-                const tPa = TREE_SETING.value.PLY[iJ].PHI[iH].PAR.TYP;
-                const tPe = TREE_SETING.value.PLY[iJ].PHI[iH].PER.TYP;
-                const aPa = TREE_SETING.value.PLY[iJ].PHI[iH].PAR.DEG.toFixed(3);
-                const aPe = TREE_SETING.value.PLY[iJ].PHI[iH].PER.DEG.toFixed(3);
+                const typPAR:string = TREE_SETING.value.PLY[iJ].PHI[iH].PAR.TYP;
+                const typPER:string = TREE_SETING.value.PLY[iJ].PHI[iH].PER.TYP;
+                const degPAR = TREE_SETING.value.PLY[iJ].PHI[iH].PAR.DEG.toFixed(3);
+                const degPER = TREE_SETING.value.PLY[iJ].PHI[iH].PER.DEG.toFixed(3);
                 
-                const cPa = tPa=="isGapEND" ? TREE_SETING.value.HUE.G_E : tPa=="isGapMID" ? TREE_SETING.value.HUE.G_M : TREE_SETING.value.HUE.PAR;                
-                const cPe = tPe=="isGapEND" ? TREE_SETING.value.HUE.G_E : tPe=="isGapMID" ? TREE_SETING.value.HUE.G_M : TREE_SETING.value.HUE.PER;
+                const huePAR = typPAR=="isGapEND" ? TREE_SETING.value.HUE.G_E : typPAR=="isGapMID" ? TREE_SETING.value.HUE.G_M : TREE_SETING.value.HUE.PAR;                //TREE_SETING.value.HUE[`${typPAR}`] 
+                const huePER = typPER=="isGapEND" ? TREE_SETING.value.HUE.G_E : typPER=="isGapMID" ? TREE_SETING.value.HUE.G_M : TREE_SETING.value.HUE.PER; //TREE_SETING.value.HUE[`${typPAR}`] 
                 return(<>
-                <div class={`bg-[${cPa}]`}>{aPa}</div>
-                <div class={`bg-[${cPa}]`}>{tPa}</div>
-                <div class={`bg-[${cPe}]`}>{tPe}</div>
-                <div class={`bg-[${cPe}]`}>{aPe}</div>
+                <div class={`bg-[${huePAR}]`}>{degPAR}</div>
+                <div class={`bg-[${huePAR}]`}>{typPAR}</div>
+                <div class={`bg-[${huePER}]`}>{typPER}</div>
+                <div class={`bg-[${huePER}]`}>{degPER}</div>
                 </>);
               })}
             </section>

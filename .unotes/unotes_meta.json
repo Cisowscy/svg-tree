@@ -1,7 +1,62 @@
 {
   "name": "",
   "isOrdered": true,
-  "folders": {},
+  "folders": {
+    "components": {
+      "name": "components",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "exports": {
+      "name": "exports",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "global": {
+      "name": "global",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "islands": {
+      "name": "islands",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "logic": {
+      "name": "logic",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "routes": {
+      "name": "routes",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "static": {
+      "name": "static",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "utils": {
+      "name": "utils",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "vendor": {
+      "name": "vendor",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    }
+  },
   "files": {
     "README": 0,
     "CHANGES": 1,

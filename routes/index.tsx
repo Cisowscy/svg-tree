@@ -20,7 +20,7 @@ export default function Home() {
       themeNr={0} sizeHead={50} sizeFoot={30} 
       class="flex-1 flex-col flex-nowrap" title="Generator SVG Sekwencji Drzewiastej"
     >   
-      <Svg sizePX={'90%'} class={`border-1 border-rose-700`}>      
+      <Svg sizePX={'1600'} class={`border-1 border-rose-700`}>      
         <SvgFractionTreePlot  />
       </Svg> 
 
