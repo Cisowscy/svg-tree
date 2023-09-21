@@ -1,6 +1,6 @@
 import { JSX } from "preact";
 import type { ComponentChildren } from "preact";
-import type { Signal } from "@preact/signals";
+//import type { Signal } from "@preact/signals";
 
 
 export type TailWindColorPallete = "inherit" | "current" | "transparent" |"black" |"white" |"slate"|"gray"|"zinc"|"neutral"|"stone"|"red"|"orange"|"amber"|"yellow"|"lime"|"green"|"emerald"|"teal"|"cyan"|"sky"|"blue"|"indigo"|"violet"|"purple"|"fuchsia"|"pink"|"rose";
@@ -22,6 +22,8 @@ export interface BoxFlexProps extends JSX.HTMLAttributes<HTMLDivElement>{
   sizeHead: number;
   sizeFoot: number;
   title:string;
+  overFlowX: "visible" | "hidden" | "clip" | "scroll" | "auto" | "inherit" | "initial" | "revert" | "revert-layer" | "unset";
+  overFlowY: "visible" | "hidden" | "clip" | "scroll" | "auto" | "inherit" | "initial" | "revert" | "revert-layer" | "unset";
 }
 
 export interface FieldSetCol3Props extends JSX.HTMLAttributes<HTMLFieldSetElement>{
@@ -71,7 +73,7 @@ interface SvgFractionTreeConfigProps {
 }
 interface SvgProps extends JSX.SVGAttributes<SVGSVGElement> {
   class? : string;
-  sizePX: number;
+  sizePX: number | string;
   children: ComponentChildren;
 }
 interface SvgFractionTreePlotProps {

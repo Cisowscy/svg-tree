@@ -41,7 +41,7 @@ export function BoxFlex(props: BoxFlexProps) {
         <header class={`${classTailWind.rowbar} ${classTailWind.header}`}>
           <span class={` ${classTailWind.title}`}>{props.title}</span>
         </header>
-        <main class={`scrolbar-theme-${themeNr} ${classTailWind.content} `} style="overflow-y: scroll" >
+        <main class={`scrolbar-theme-${themeNr} ${classTailWind.content} `} style={`overflow-x: ${props.overFlowX}; overflow-y: ${props.overFlowY}`} >
           {props.children}
         </main>
         <footer class={`${classTailWind.rowbar} ${classTailWind.footer}`}>

@@ -3,7 +3,6 @@
 import type { SignalStateDiagnosticOutPutProps } from "@@@types";
 
 import {
-  TREE_SETING,
   SETING_SVG_TREE
 } from "@@@globalCONTROLS";
 
@@ -83,8 +82,8 @@ export function SignalStateDiagnosticOutPut(
                   <td class={HUE}>{L.fix}</td>       
                   <td class={HUE}>{L.xor}</td>      
                   <td class={HUE}>{L.mid}</td>       
-                  <td class={HUE}>{L.deg.zero.toFixed(3)}</td>       
-                  <td class={HUE}>{L.deg.step.toFixed(3)}</td>            
+                  <td class={HUE}>{L.ang.zero.deg.toFixed(3)}</td>       
+                  <td class={HUE}>{L.ang.step.deg.toFixed(3)}</td>            
                 </tr>
               )
             })}
@@ -108,30 +107,7 @@ export function SignalStateDiagnosticOutPut(
         </table>
       </section>
       
-      {/*TREE_SETING.value.PLY.map((J,iJ) =>{
-        return(
-          <>          
-            <div class="h-[40px] w-full bg-black"></div>
-            <section class={`${classTailWind.section} grid grid-cols-4 gap-[5px] place-content-stretch box-border`}>
-              {TREE_SETING.value.PLY[iJ].PHI.map((H,iH)=>{
-                const typPAR:string = TREE_SETING.value.PLY[iJ].PHI[iH].PAR.TYP;
-                const typPER:string = TREE_SETING.value.PLY[iJ].PHI[iH].PER.TYP;
-                const degPAR = TREE_SETING.value.PLY[iJ].PHI[iH].PAR.DEG.toFixed(3);
-                const degPER = TREE_SETING.value.PLY[iJ].PHI[iH].PER.DEG.toFixed(3);
-                
-                const huePAR = typPAR=="isGapEND" ? TREE_SETING.value.HUE.G_E : typPAR=="isGapMID" ? TREE_SETING.value.HUE.G_M : TREE_SETING.value.HUE.PAR;                //TREE_SETING.value.HUE[`${typPAR}`] 
-                const huePER = typPER=="isGapEND" ? TREE_SETING.value.HUE.G_E : typPER=="isGapMID" ? TREE_SETING.value.HUE.G_M : TREE_SETING.value.HUE.PER; //TREE_SETING.value.HUE[`${typPAR}`] 
-                return(<>
-                <div class={`bg-[${huePAR}]`}>{degPAR}</div>
-                <div class={`bg-[${huePAR}]`}>{typPAR}</div>
-                <div class={`bg-[${huePER}]`}>{typPER}</div>
-                <div class={`bg-[${huePER}]`}>{degPER}</div>
-                </>);
-              })}
-            </section>
-          </>
-        )
-      })*/}
+      
       <div class="h-[40px] w-full bg-black"></div>
       <section class={`${classTailWind.section}`}>C</section>
       <section class={`${classTailWind.section}`}>D</section>

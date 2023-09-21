@@ -1,213 +1,332 @@
-import { rgb8,bgRgb8 } from "$std/fmt/colors.ts";
-import type { initTreeFractionRhoOut } from "@@@types";
+import { bgRgb24, rgb24,bold } from "$std/fmt/colors.ts";
 
+//^ ------------------------------------------------------------- TYPES ---------
+interface ELEMENTAR {
+    GEN: number; END: number; GAP: number; 
+    huePA: string; huePE: string; hueGE: string; hueGM: string;
+    gen0sPA:number; gen0HUE: string; gen0sPE:number;
+    gen1sPA:number; gen1HUE: string; gen1sPE:number;
+    gen2sPA:number; gen2HUE: string; gen2sPE:number;
+    gen3sPA:number; gen3HUE: string; gen3sPE:number;
+    gen4sPA:number; gen4HUE: string; gen4sPE:number;
+    gen5sPA:number; gen5HUE: string; gen5sPE:number;
+    gen6sPA:number; gen6HUE: string; gen6sPE:number;
+    gen7sPA:number; gen7HUE: string; gen7sPE:number;
+}
 
-export function TreeFractionInit(genendgap:{gen:number,gap:number,end:number},log?:boolean):initTreeFractionRhoOut {
-  const {gen, gap, end} = genendgap;
-  let logg = log ?? false;
-  let idPER =0;
-  let idPAR =0;
-  const CONFIG = [...new Array(gen+1).keys()].map(nrGen => {
-    const frPer_frEnd= (nrGen===0) ? 0 : end;
-    const frPar_frEnd= (nrGen===0) ? 1 : end+1;
-    const frPer_frGen= Math.floor(Math.pow(2,nrGen));
-    const frPar_frGen= Math.floor(Math.pow(2,nrGen-1));
-    const frPer_frGap=(nrGen===0 || nrGen===1) ? 0 : (frPar_frGen-1)*gap;
-    const frPar_frGap=(nrGen===0) ? 0 : frPar_frGen +frPer_frGap -1;
-    const fractions = (frPer_frGen+frPer_frGap+frPer_frEnd)==(frPar_frGen+frPar_frGap+frPar_frEnd) ? (frPar_frGen+frPar_frGap+frPar_frEnd) : 0;
-    
-    function Fraction(nrFRA:number,PerOrPar:string) {
-      const indexFraInc = [...new Array(fractions).keys()].map(K =>K+1);
-      const indexFraDec = indexFraInc.toReversed();
-      const indexFraIncMod = indexFraInc.map(K =>K%(2+gap));
-      const indexFraDecMod = indexFraDec.map(K =>K%(2+gap));
-      let angle0 ={per:0,par:0}; 
-      const angleFraParent = [...new Array(fractions).keys()].map(Y=>{
-        if(Y===0){
-          angle0.par = angle0.par + (((360/fractions)*(end+1))/2);
-        }
-        const angle = (angle0.par + Y*(360/fractions));
-        return angle>=720?angle-720:angle>=360?angle-360:angle;
-      });
-      const angleFraPerson = [...new Array(fractions).keys()].map(Y=>{
-        if(Y===0){
-          angle0.per = angle0.per + (((360/fractions)*end)/2);
-        }
-        const angle = (angle0.per + Y*(360/fractions));
-        return angle>=720?angle-720:angle>=360?angle-360:angle;
-      });  
-      
-      return {
-        INFO:{
-          indexFra:nrFRA,
-          indexFraInc:indexFraInc[nrFRA], //!J
-          indexFraDec:indexFraDec[nrFRA], //!K
-          indexFraIncMod:indexFraIncMod[nrFRA], //!L
-          indexFraDecMod:indexFraDecMod[nrFRA], //!M
-        },
-        DATA:{
-          angleFra: PerOrPar ==="par"? angleFraParent[nrFRA] : angleFraPerson[nrFRA],
+interface HUECOLORS {
+  arm: {
+    par: string;
+    per: string;
+    mid: string;
+    end: string;
+  };
+  ply: string[];
+}
+
+interface ELEMENTAR_2 {
+  ply: number;
+  end: number;
+  mid: number;
+}
+interface ELEMENT_R {  
+  PA: [number,number,number];
+  PE: [number,number,number];
+}
+interface GETNUMBER {
+  set: ELEMENTAR_2;
+  ply: ELEMENT_R[];
+}
+
+interface FRACT_BIT {
+      gen: number;
+      mid: number;
+      end: number;
+      sum: number;
+}
+interface FRA_ANGLE {
+  step: {
+      deg: number;
+      fra: (string | number)[];
+  };
+  zero: {
+    deg: number;
+    fra: (string | number)[];
+  };
+}
+type TYP_BITS =  "bitGenPar" | "bitGenPer" | "bitEndPar" | "bitEndPer" | "bitMidPar" | "bitMidPer";
+interface FRACT_ARM {
+  _nr: number;
+  deg: number;
+  typ: TYP_BITS;
+}
+
+interface FRACTIONS {
+  _nr: number;
+  typ: "PA" | "PE";
+  iPe: number;
+  iPa: number;
+  idn: number;
+  xor: number;
+  fix: number;
+  bit: FRACT_BIT;
+  mid: number;
+  ang: FRA_ANGLE;
+  arm: FRACT_ARM[];
+  deg?: {
+      step: number;
+      zero: number;
+  };
+}
+
+interface FRACTIONS_2 extends FRACTIONS {
+  ply: number[];
+}
+//^ ---------------------------------------------------------------------------------------
+
+export function FunctionMakeSeting(
+  /* TREE_LAYERS.value */ T:ELEMENTAR, 
+  /* SVG_HALF.value */ H: number,  
+  ): {
+    hue: HUECOLORS;
+    set: ELEMENTAR_2;
+    ply: FRACTIONS_2[];
+} {
+    function fractions(Q:{
+      /* TREE_LAYERS.value.GEN */ PLY:number,
+      /* TREE_LAYERS.value.GAP */ GAP:number,
+      /* TREE_LAYERS.value.END */ MID:number
+    },CONSOL_LOG?:boolean):FRACTIONS[]  {
+      function A(D:number):number {
+        //while (D>=360) {
+        //  D = D -360;
+        //}
+        return D;
+      }
+      function B(T:string) {
+        switch (T) {
+          case 'bitGenPar': return bgRgb24(rgb24(bold('bitGenPar'),0x837834), 0xb9ac65);
+          case 'bitGenPer': return bgRgb24(rgb24(bold('bitGenPer'),0x568242), 0x8ab873);
+          case 'bitEndPar': return bgRgb24(rgb24(bold('bitEndPar'),0x00868a), 0x3fbdc1);
+          case 'bitEndPer': return bgRgb24(rgb24(bold('bitEndPer'),0x357ea3), 0x72b4db);
+          case 'bitMidPar': return bgRgb24(rgb24(bold('bitMidPar'),0x9565a2), 0xcc99d9);
+          case 'bitMidPer': return bgRgb24(rgb24(bold('bitMidPer'),0xa56569), 0xde999c);    
+          default: return bgRgb24(rgb24(bold(T),0x777777), 0xababab);
         }
       }
-    }
-    const RESULT = {
-      INFO: {
-        indexGen:nrGen, //!C
-        setGap:gap, //!A
-        setEnd:end, //!B
-        itemsFra: fractions, //!I
-        itemsFra_PAR:{
-          itemsGen:frPar_frGen, //!D
-          itemsGap:frPar_frGap, //!F
-          itemsEnd:frPar_frEnd, //!H          
-          angleFraZero:((360/fractions)*(end+1))/2 //~R
-        },
-        itemsFra_PER:{
-          itemsGen:frPer_frGen, //!E
-          itemsGap:frPer_frGap, //!G
-          itemsEnd:frPer_frEnd, //!H2          
-          angleFraZero:((360/fractions)*end)/2 //~P
-        },
-        angleFraStep: 360/fractions //~P & ~R
-      },
-      DATA: {
-        PAR: [...new Array(fractions).keys()].map(n=>Fraction(n,'par')),
-        PER: [...new Array(fractions).keys()].map(n=>Fraction(n,'per'))
-      }
-    };
-    //
-    return RESULT;
-  }).map((GEN, nrGEN)=>{
-    return {
-      INFO: {...GEN.INFO},
-      DATA:(()=>{
-        const PAR = GEN.DATA.PAR.map((FRA,nrFRA)=>{
-          const testList = new Set([...Array(1+GEN.INFO.itemsFra_PAR.itemsEnd).keys()].slice(1));
-          const ParOrGapOrEnd = GEN.INFO.indexGen ===0 ? "isEND":testList.has(FRA.INFO.indexFraDec) ? "isEND" : FRA.INFO.indexFraIncMod===1 ? "isPAR" : "isGAP";
-          
+      const PLY:FRACTIONS[] = [...Array(2*(1+Q.PLY)).keys()].map(N=>{
+        const _nr:number = N;
+        const typ: "PA" | "PE" = N%2===0?"PA":"PE";
+        const iPe:number = N%2===0?N/2:(N-1)/2;
+        const iPa:number = iPe-1;
+        const idn:number = N%2===0?iPa:iPe;
+        const xor:number = Math.ceil(Math.pow(2,iPa)-1);
+        const fix:number = iPa<0 ? N%2===0? (-(Q.MID)+1) : (-(Q.MID)+0) : N%2===0? 1 : 0;
+        const bit:FRACT_BIT = ((idnPLY, midNUM, xorNUM, fixNUM, idnPAR)=>{
+          const bitGen:number = Math.floor(Math.pow(2,idnPLY));
+          const bitMid:number = fixNUM + midNUM;
+          const halfMi:number = idnPAR<0 ? 0.5 : bitMid/2;
+          const bitEnd:number = xorNUM*(2*halfMi);
+          const bitSum:number = bitGen+bitMid+bitEnd;
           return {
-            INFO:{...FRA.INFO},
-            DATA:{
-              itemType: ParOrGapOrEnd,
-              indexPAR:(()=>{
-                if (ParOrGapOrEnd==="isPAR") {
-                  idPAR++;
-                  return idPAR;              
-                }else {
-                  return null;
-                }
-              })(),
-              ...FRA.DATA
+            gen: bitGen,
+            end: bitEnd,
+            mid: bitMid,
+            sum: bitSum
+          };
+        })(idn,Q.MID,xor, fix, iPa);
+        const mid:number = iPa<0 ? 0.5 : bit.mid/2;
+        const ang:FRA_ANGLE = ((ITEMS, HALF)=>{
+          return {
+            step:{
+              fra: [360,'/',ITEMS],
+              deg: 360/ITEMS
+            },
+            zero:{
+              fra: [2*HALF,'*(',360,'/',2*ITEMS,')'],
+              deg: 2*HALF*(360/(2*ITEMS))
             }
           };
-        });
-        const PER = GEN.DATA.PER.map((FRA,nrFRA)=>{
-          const testList = new Set([...Array(1+GEN.INFO.itemsFra_PER.itemsEnd).keys()].slice(1));
-          const PerOrGapOrEnd = (testList.has(FRA.INFO.indexFraDec) && GEN.INFO.indexGen !==0) ? "isEND" : (FRA.INFO.indexFraIncMod===1 || FRA.INFO.indexFraIncMod===2) ? "isPER" : "isMID";
-
-          return {
-            INFO:{...FRA.INFO},
-            DATA:{
-              itemType: PerOrGapOrEnd,
-              indexPER: (()=>{
-                if (PerOrGapOrEnd==="isPER") {
-                  idPER++;
-                  return idPER;              
-                }else {
-                  return null;
-                }
-              })(),
-              ...FRA.DATA
+        })(bit.sum, mid);
+        //  switch (_nr) {
+        //    case 0: return (mid/2)*aStepD;
+        //    case 1: return (mid/2)*aStepD;
+        //    case 3: return 10;//(mid/2)*aStepD;
+        //    case 4: return 90;
+        //  
+        //    default: return 0;
+        //  }
+        //  //return A(mid*aStepD);
+        //})();
+        const arm:FRACT_ARM[] = ((xorNUM, bitGen, bitEnd, bitMid, NR, aStepD, aZeroD)=>{
+          const R: TYP_BITS[] = [];
+          let X = xorNUM;
+          if(X===0 ){
+            let G =bitGen;
+            while(G>0){
+              G--;
+              R.push(NR%2===0?"bitGenPar":"bitGenPer");
             }
-          };
-        });
-        return {
-          PAR:PAR,
-          PER:PER
+            let E =bitEnd;
+            while(E>0){
+              E--;
+              R.push(NR%2===0?"bitEndPar":"bitEndPer");
+            }
+            let M =bitMid;
+            while(M>0){
+              M--;
+              R.push(NR%2===0?"bitMidPar":"bitMidPer");
+            }        
+          } else {
+            while (X>0) {
+              X--;
+              let G = (bitGen-(NR%2===0?1:2))/xorNUM;
+              let E = bitEnd/xorNUM;
+              while(G+E>0){
+                if (G>0) {
+                  G--;
+                  R.push(NR%2===0?"bitGenPar":"bitGenPer");            
+                } else if (E>0){
+                  E--;
+                  R.push(NR%2===0?"bitEndPar":"bitEndPer");
+                }
+              }
+            }
+            let G = (bitGen-(NR%2===0?1:2))/xorNUM;
+            while(G>0){
+              G--;
+              R.push(NR%2===0?"bitGenPar":"bitGenPer");
+            }
+            let M =bitMid;
+            while(M>0){
+              M--;
+              R.push(NR%2===0?"bitMidPar":"bitMidPer");
+            }
+          }
+          return R.map((T,Y) =>{
+            const REZ:FRACT_ARM = {_nr:Y, deg:A((Y*aStepD)+aZeroD),typ:T}
+            return REZ;
+          });
+        })(xor,bit.gen, bit.end, bit.mid, _nr, ang.step.deg, ang.zero.deg);
+        const deg:{
+          step: number;
+          zero: number;
+        } = {
+          step: ang.step.deg,
+          zero: ang.zero.deg
+        };    
+        //(()=>{
+        if((CONSOL_LOG??false)===true){
+          console.log(
+            /* plyIdn */ bgRgb24(rgb24(bold(`_nr: ${_nr.toString().padEnd(2,' ')} `),0x777777), 0xababab),
+            /* iPe */ bgRgb24(rgb24(bold(`iPe: ${iPe.toString().padEnd(2,' ')} `),0x568242), 0x8ab873),
+            /* typ */ N%2===0?bgRgb24(rgb24(bold(` PA `),0x837834), 0xb9ac65):bgRgb24(rgb24(bold(` PE `),0x568242), 0x8ab873),
+            /* idn */ N%2===0?bgRgb24(rgb24(bold(` ${iPa.toString().padEnd(2,' ')} `),0x837834), 0xb9ac65):bgRgb24(rgb24(bold(` ${iPe.toString().padEnd(2,' ')} `),0x568242), 0x8ab873),
+            /* iPa */ bgRgb24(rgb24(bold(`iPa: ${iPa.toString().padEnd(2,' ')} `),0x837834), 0xb9ac65),
+            /* fix */ bgRgb24(rgb24(bold(`0: ${fix.toString().padEnd(2,' ')} `),0x777777), 0xababab),
+            /* bitGen */ N%2===0?bgRgb24(rgb24(bold(`bitGen: ${bit.gen.toString().padEnd(3,' ')} `),0x837834), 0xb9ac65):bgRgb24(rgb24(bold(`bitGen: ${bit.gen.toString().padEnd(3,' ')} `),0x568242), 0x8ab873),
+            /* bitEnd */ N%2===0?bgRgb24(rgb24(bold(`bitEnd: ${bit.end.toString().padEnd(3,' ')} `),0x00868a), 0x3fbdc1):bgRgb24(rgb24(bold(`bitEnd: ${bit.end.toString().padEnd(3,' ')} `),0x357ea3), 0x72b4db),
+            /* bitMid */ N%2===0?bgRgb24(rgb24(bold(`bitMid: ${bit.mid.toString().padEnd(2,' ')} `),0x9565a2), 0xcc99d9):bgRgb24(rgb24(bold(`bitMid: ${bit.mid.toString().padEnd(2,' ')} `),0xa56569), 0xde999c),
+            /* bitSum */ bgRgb24(rgb24(bold(`bitSum: ${bit.sum.toString().padEnd(3,' ')} `),0x777777), 0xababab),
+            /* mid */ bgRgb24(rgb24(bold(`bitMid/2: ${mid.toString().padEnd(3,' ')} `),0x777777), 0xababab),
+            /* xor */ bgRgb24(rgb24(bold(`X: ${xor.toString().padEnd(2,' ')} `),0x777777), 0xababab),
+            /* xor */ bgRgb24(rgb24(bold(`aZeroD: ${ang.zero.deg.toFixed(3).padEnd(7,' ')} `),0x777777), 0xababab),
+            /* xor */ bgRgb24(rgb24(bold(`aStepD: ${ang.step.deg.toFixed(3).padEnd(7,' ')} `),0x777777), 0xababab),
+          );
+          arm.map(W=>{
+            console.log(B(W.typ), B(W.deg.toFixed(3).padEnd(7,' ')))
+          });
+        }
+        const REZULT:FRACTIONS =  {
+          _nr:_nr,
+          typ: typ,
+          iPe: iPe,
+          iPa: iPa,
+          idn: idn,
+          xor: xor,
+          fix: fix,
+          bit: bit,
+          mid: mid,
+          ang: ang,
+          deg: deg,
+          arm: arm
         };
-      })()
-      //
-    };
-  });
-  //console.log(Deno.inspect(CONFIG, {depth: 6}));
-  (()=>{
-    function  cEND(n:string,t:string|number|null,l:number) { return bgRgb8((n===''?'':`| ${n}: `)+`${t===null?'':t}`.padStart(l, " ")+(n===''?'':' |'),97)}
-    function  cGAP(n:string,t:string|number|null,l:number) { return bgRgb8((n===''?'':`| ${n}: `)+`${t===null?'':t}`.padStart(l, " ")+(n===''?'':' |'),26)}
-    function  cPER(n:string,t:string|number|null,l:number) { return bgRgb8((n===''?'':`| ${n}: `)+`${t===null?'':t}`.padStart(l, " ")+(n===''?'':' |'),28)}
-    function  cPAR(n:string,t:string|number|null,l:number) { return bgRgb8((n===''?'':`| ${n}: `)+`${t===null?'':t}`.padStart(l, " ")+(n===''?'':' |'),94)}
-    function cINF1(n:string,t:string|number|null,l:number) { return bgRgb8((n===''?'':`| ${n}: `)+`${t===null?'':t}`.padStart(l, " ")+(n===''?'':' |'),239)}
-    function cINF2(n:string,t:string|number|null,l:number) { return bgRgb8((n===''?'':`| ${n}: `)+`${t===null?'':t}`.padStart(l, " ")+(n===''?'':' |'),235)}
-    function cTyp(t:string) {
-      switch (t) {
-        case "isEND":
-          return bgRgb8("isEND",97);
-        case "isGAP":          
-        case "isMID":
-          return bgRgb8("isGAP",26);
-        case "isPER":
-          return bgRgb8("isPER",28);
-        case "isPAR":
-          return bgRgb8("isPAR",94);
-        default:
-          return '';
-      }
-    }  
-    if (logg){
-      CONFIG.map(GEN=>{
-        console.log('');
-        console.log('');
-        console.log(
-          cEND('setEnd',GEN.INFO.setEnd,2),
-          cGAP('setGap',GEN.INFO.setGap,2),
-          cINF1('nrGen',GEN.INFO.indexGen,2),
-          cINF1('sumFra',GEN.INFO.itemsFra,3)
-        );
-        console.log(
-          cEND('sumEnd',GEN.INFO.itemsFra_PAR.itemsEnd,2),
-          cGAP('sumGap',GEN.INFO.itemsFra_PAR.itemsGap,2),
-          cPAR('sumGen',GEN.INFO.itemsFra_PAR.itemsGen,2),
-          cINF2('angle',GEN.INFO.itemsFra_PAR.angleFraZero,4)
-        );
-        console.log(
-          cEND('sumEnd',GEN.INFO.itemsFra_PER.itemsEnd,2),
-          cGAP('sumGap',GEN.INFO.itemsFra_PER.itemsGap,2),
-          cPER('sumGen',GEN.INFO.itemsFra_PER.itemsGen,2),
-          cINF2('angle',GEN.INFO.itemsFra_PER.angleFraZero,4)
-        );
-      for (let frNR = 0; frNR < GEN.DATA.PAR.length; frNR++) {
-        const PAR = GEN.DATA.PAR[frNR];
-        const PER = GEN.DATA.PER[frNR];
-        console.log(
-          cEND('',GEN.INFO.setEnd,1),
-          cGAP('',GEN.INFO.setGap,1),
-          cINF1('',GEN.INFO.indexGen,1),
-          cINF1('',GEN.INFO.itemsFra,2),
-          '**',
-          cPAR('iPAR',PAR.DATA.indexPAR,4),
-          cPAR('deg',PAR.DATA.angleFra,3),
-          cTyp(PAR.DATA.itemType),
-          cINF2('',PAR.INFO.indexFraIncMod,1),
-          cINF2('',PAR.INFO.indexFraDecMod,1),
-          cINF1('',PAR.INFO.indexFraInc,2),
-          cINF1('',PAR.INFO.indexFraDec,2),
-          '**',
-          cPER('iPER',PER.DATA.indexPER,4),
-          cPER('iPER',PER.DATA.angleFra,3),
-          cTyp(PER.DATA.itemType),
-          cINF2('',PER.INFO.indexFraIncMod,1),
-          cINF2('',PER.INFO.indexFraDecMod,1),
-          cINF1('',PER.INFO.indexFraInc,2),
-          cINF1('',PER.INFO.indexFraDec,2),
-          '**'
-        );
-
-        
-      }
-
+        return REZULT;
       });
+      return PLY;  
     }
-  })();
-
-  
-  return CONFIG;  
+    function layers(
+      /* TREE_LAYERS.value */ T:ELEMENTAR,       
+      /* SVG_HALF.value */ H: number,
+      ): {
+        HUE: HUECOLORS;
+        NUM: GETNUMBER;
+    } {
+      function GetHue(N:number):HUECOLORS {
+          return {
+            arm:{ par: T.huePA, per: T.huePE, mid: T.hueGE, end:T.hueGM},
+            ply:[
+              T.gen0HUE,    
+              T.gen1HUE,
+              T.gen2HUE,
+              T.gen3HUE,
+              T.gen4HUE,
+              T.gen5HUE,
+              T.gen6HUE,
+              T.gen7HUE
+            ].toSpliced(1 + N)
+          };       
+        }
+      function GetNum(N:number):GETNUMBER {   
+          return {
+            set: {ply: T.GEN, end: T.GAP, mid: T.END},
+            ply: (()=>{
+              const befPLY_0 = [
+                {sPA: T.gen0sPA , sPE: T.gen0sPE },    
+                {sPA: T.gen1sPA , sPE: T.gen1sPE },
+                {sPA: T.gen2sPA , sPE: T.gen2sPE },
+                {sPA: T.gen3sPA , sPE: T.gen3sPE },
+                {sPA: T.gen4sPA , sPE: T.gen4sPE },
+                {sPA: T.gen5sPA , sPE: T.gen5sPE },
+                {sPA: T.gen6sPA , sPE: T.gen6sPE },
+                {sPA: T.gen7sPA , sPE: T.gen7sPE }
+              ].toSpliced(1 + N)
+              const cent =  (H / befPLY_0.map((x) => x.sPE + x.sPA).reduce((a,b) => a + b))
+              let r = 0;
+              const befPLY = befPLY_0.map((x) => {
+                r = r + (cent * x.sPA);
+                const rPARENT = r;
+                r = r + (cent* x.sPE);
+                const rPERSON = r;
+                return {
+                  ...x,
+                  rPE: rPERSON,
+                  rPA: rPARENT,
+                };
+              });
+              return befPLY.map((x,i) => {
+                const a = (i-1)<0 ? 0 : befPLY[i-1].rPE;
+                const b = (i+1)>T.GEN ? H : befPLY[i+1].rPA;      
+                return {
+                  PA:[a,x.rPA,x.rPE],
+                  PE:[x.rPA,x.rPE,b] 
+                };
+              });
+            })()
+          }
+        }
+      return {HUE:GetHue(T.GEN), NUM:GetNum(T.GEN)};
+    }
+    const F = fractions({PLY:T.GEN,GAP:T.GAP,MID:T.END},false);
+    const L = layers(T,H);
+    return {
+      hue: L.HUE,
+      set: L.NUM.set,
+      ply: F.map(O=>{
+        return {
+          ...O,
+          ply: O.typ=="PA" ? L.NUM.ply[O.iPe].PA  : L.NUM.ply[O.iPe].PE
+        }
+      })
+    }
 }

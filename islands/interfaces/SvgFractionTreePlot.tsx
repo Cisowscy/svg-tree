@@ -31,7 +31,7 @@ export function SvgFractionTreePlot(props: SvgFractionTreePlotProps) {
       </g>
       <g name="(arm) φ" >
         {SETING_SVG_TREE.value.ply.map(L=>{
-          const degZERO = L.deg.zero;
+          const aZeroD = L.deg.zero;
           return(
             <g name={`(arm) φ-${L._nr.toString().padStart(2,'0')}-${L.typ}_${L.iPe}`}>
               {L.arm.map(F=>{
@@ -47,7 +47,7 @@ export function SvgFractionTreePlot(props: SvgFractionTreePlotProps) {
                   }
                 })();
                 return(
-                  <line name={`(arm) φ-${L._nr.toString().padStart(2,'0')}-${L.typ}_${L.iPe}_${F._nr.toString().padStart(4,'0')}`} x="0" y1={L.ply[0].toFixed(3)} y2={L.ply[1].toFixed(3)} stroke={HUE} stroke-width="60" transform={`rotate(${L.deg.zero}) rotate(${F.deg})`} />
+                  <line name={`(arm) φ-${L._nr.toString().padStart(2,'0')}-${L.typ}_${L.iPe}_${F._nr.toString().padStart(4,'0')}`} x="0" y1={L.ply[0].toFixed(3)} y2={L.ply[1].toFixed(3)} stroke={HUE} stroke-width="60" transform={` rotate(${L.deg.zero}) rotate(${F.deg})`} />
                 );
               })}
             </g>
