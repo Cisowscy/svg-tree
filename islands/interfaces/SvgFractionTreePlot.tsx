@@ -1,50 +1,66 @@
 // Document https://fresh.deno.dev/docs/concepts/islands
 
-import type { Signal } from "@preact/signals";
-import { signal, computed, effect, batch } from "@preact/signals";
-import type { SvgFractionTreePlotProps,initTreeFractionRhoOut } from "@@@types";
+//import type { Signal } from "@preact/signals";
+//import { signal, computed, effect, batch } from "@preact/signals";
+import type { SvgFractionTreePlotProps } from "@@@types";
 
 
 import {
-  SVG_HALF,  
-  SETING_SVG_TREE
+  //SVG_HALF,
+  SETING_SVG_TREE_2
 } from "@@@globalCONTROLS";
 
 
 
 export function SvgFractionTreePlot(props: SvgFractionTreePlotProps) {
+  const A = {
+    axis_X: SETING_SVG_TREE_2.value.directionOfTheAxisX,
+    axis_Y: SETING_SVG_TREE_2.value.directionOfTheAxisY,
+    angInc: SETING_SVG_TREE_2.value.directionOfTheAngleOfIncrement,
+    ang_00: SETING_SVG_TREE_2.value.directionOfTheAngleOfZeroValue,
+  };
+  const B = SETING_SVG_TREE_2.value.getCalculated1OfPlysRadiuses;
+  const C = SETING_SVG_TREE_2.value.getHue;
+  const D = SETING_SVG_TREE_2.value.getCalculated2OfPlysIdentity;
+
+  const E = SETING_SVG_TREE_2.value.getCalculated3OfPlysFraction;
+  const F = SETING_SVG_TREE_2.value.getCalculated4OfPlysArmChain;
+  const G = SETING_SVG_TREE_2.value.getCalculated5OfPlysArmTypes;
+  const H = SETING_SVG_TREE_2.value.getCalculated6OfPlysArmAngle;
 
   
 
   return (   
     <g>
       <g name="(ply) ρ" >
-        {SETING_SVG_TREE.value.ply.map(L=>{
-          const HUE = SETING_SVG_TREE.value.hue.ply[L.iPe];
+        {B.map((W, iW)=>{          
+          const HUE = C.huePly.get(['PE_',(iW-iW%2)/2].join(''));
           return(
-            <circle name={`ρ-${L._nr.toString().padStart(2,'0')}-${L.typ}_${L.iPe}`} cx="0" cy="0" fill="none" stroke-width="50" stroke={`${HUE}`} r={`${L.ply[1].toFixed(3)}`} />
+            <circle name={`ρ-${(iW-iW%2)/2}-${iW}`} cx="0" cy="0" fill="none" stroke-width="50" stroke={`${HUE}`} r={W.toFixed(3)} />
           );
         })}
       </g>
-      <g name="(arm) φ" >
-        {SETING_SVG_TREE.value.ply.map(L=>{
-          const aZeroD = L.ang.zero.deg;
+      <g name="(ply-arm) ρ-φ" >
+        {H.map((W,iW)=>{
+          //~ A.ang_00
+          const step = F[iW];
+          //const aZeroD = L.ang.zero.deg;
           return(
-            <g name={`(arm) φ-${L._nr.toString().padStart(2,'0')}-${L.typ}_${L.iPe}`}>
-              {L.arm.map(F=>{
+            <g name={`(ply-arm) ρ-${(iW-iW%2)/2}-φ-${iW}`}>
+              {W.map((V,iV)=>{
                 const HUE = (()=>{
-                  switch (F.typ) {
-                    case 'bitGenPar': return SETING_SVG_TREE.value.hue.arm.par; //bgRgb24(rgb24(bold('bitGenPar'),0x837834), 0xb9ac65);
-                    case 'bitGenPer': return SETING_SVG_TREE.value.hue.arm.per; //bgRgb24(rgb24(bold('bitGenPer'),0x568242), 0x8ab873);
-                    case 'bitEndPar': return SETING_SVG_TREE.value.hue.arm.end; //bgRgb24(rgb24(bold('bitEndPar'),0x00868a), 0x3fbdc1);
-                    case 'bitEndPer': return SETING_SVG_TREE.value.hue.arm.end; //bgRgb24(rgb24(bold('bitEndPer'),0x357ea3), 0x72b4db);
-                    case 'bitMidPar': return SETING_SVG_TREE.value.hue.arm.mid; //bgRgb24(rgb24(bold('bitMidPar'),0x9565a2), 0xcc99d9);
-                    case 'bitMidPer': return SETING_SVG_TREE.value.hue.arm.mid; //bgRgb24(rgb24(bold('bitMidPer'),0xa56569), 0xde999c);    
-                    default: return '#ababab'; //bgRgb24(rgb24(bold(T),0x777777), 0xababab);
+                  switch (G[iW][iV]) {
+                    case 'isBitGenOfPar': return C.hueFra4.get("genBitPar");
+                    case 'isBitGenOfPer': return C.hueFra4.get("genBitPer");
+                    case 'isSetGapOfPar': return C.hueFra4.get("gapSetAll");
+                    case 'isSetGapOfPer': return C.hueFra4.get("gapSetAll");
+                    case 'isMidGapOfPar': return C.hueFra4.get("gapMidAll");
+                    case 'isMidGapOfPer': return C.hueFra4.get("gapMidAll");    
+                    default: return '#ababab'; 
                   }
                 })();
                 return(
-                  <line name={`(arm) φ-${L._nr.toString().padStart(2,'0')}-${L.typ}_${L.iPe}_${F._nr.toString().padStart(4,'0')}`} x="0" y1={L.ply[0].toFixed(3)} y2={L.ply[1].toFixed(3)} stroke={HUE} stroke-width="60" transform={` rotate(${L.ang.zero.deg}) rotate(${F.deg})`} />
+                  <line name={`(arm) ρ-${(iW-iW%2)/2}-φ-${iW}`} x="0" y1={iW-1<0?0:B[iW-1].toFixed(3)} y2={B[iW].toFixed(3)} stroke={HUE} stroke-width="60" transform={` rotate(${V}) rotate(0)`} />
                 );
               })}
             </g>

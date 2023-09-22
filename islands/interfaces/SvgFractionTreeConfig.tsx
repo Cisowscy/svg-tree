@@ -1,7 +1,7 @@
 // Document https://fresh.deno.dev/docs/concepts/islands
 
-import { useState } from 'preact/hooks';
-import type { Signal } from "@preact/signals";
+//import { useState } from 'preact/hooks';
+//import type { Signal } from "@preact/signals";
 import type { SvgFractionTreeConfigProps } from "@@@types";
 import { InputNumber, InputColor, FieldSetCol3, Button } from "@@@templatesChangeLESS";
 
@@ -28,12 +28,12 @@ export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
       <FieldSetCol3  
                                 title={`(φ) pokolenia`} 
                                 name="cofigLayers">
-        <InputNumber title="GEN" name="GEN" value={TREE_LAYERS.value.GEN} onInput={changeConfigFractions} class4label={` h-[33px] text-[20px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={7} step={1} />
-        <InputNumber title="END" name="END" value={TREE_LAYERS.value.END} onInput={changeConfigFractions} class4label={` h-[33px] text-[20px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
-        <InputNumber title="GAP" name="GAP" value={TREE_LAYERS.value.GAP} onInput={changeConfigFractions} class4label={` h-[33px] text-[20px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
-        <p class={`text-[10px]`}   >GEN: {TREE_LAYERS.value.GEN}</p>
-        <p class={`text-[10px]`}   >END: {TREE_LAYERS.value.END}</p>
-        <p class={`text-[10px]`}   >GAP: {TREE_LAYERS.value.GAP}</p>
+        <InputNumber title="PLY" name="PLY" value={TREE_LAYERS.value.PLY} onInput={changeConfigFractions} class4label={` h-[33px] text-[20px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={7} step={1} />
+        <InputNumber title="MID" name="MID" value={TREE_LAYERS.value.MID} onInput={changeConfigFractions} class4label={` h-[33px] text-[20px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
+        <InputNumber title="SET" name="SET" value={TREE_LAYERS.value.SET} onInput={changeConfigFractions} class4label={` h-[33px] text-[20px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
+        <p class={`text-[10px]`}   >PLY: {TREE_LAYERS.value.PLY}</p>
+        <p class={`text-[10px]`}   >MID: {TREE_LAYERS.value.MID}</p>
+        <p class={`text-[10px]`}   >SET: {TREE_LAYERS.value.SET}</p>
         <div
           class={`col-span-3 grid grid-cols-2 gap-[5px]`}
         >
@@ -48,7 +48,7 @@ export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
         </div>
       </FieldSetCol3>
 
-      {TREE_LAYERS.value.GEN >=0 && <FieldSetCol3  
+      {TREE_LAYERS.value.PLY >=0 && <FieldSetCol3  
                                   title ={`(ρ) pokolenie 0`}
                                   name=   "cofigLayer0">
         <InputNumber name="gen0sPA"  value={TREE_LAYERS.value.gen0sPA} onInput={changeConfigFractions} title="sPA" class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
@@ -59,7 +59,7 @@ export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
         <p class={`text-[10px]`} >sPE: {TREE_LAYERS.value.gen0sPE}</p>
       </FieldSetCol3>}
 
-      {TREE_LAYERS.value.GEN > 0 && <FieldSetCol3  
+      {TREE_LAYERS.value.PLY > 0 && <FieldSetCol3  
                                   title ={`(ρ) pokolenie 1`}
                                   name=   "cofigLayer1">
         <InputNumber name="gen1sPA"  value={TREE_LAYERS.value.gen1sPA} onInput={changeConfigFractions} title="sPA" class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
@@ -70,7 +70,7 @@ export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
         <p class={`text-[10px]`} >sPE: {TREE_LAYERS.value.gen1sPE}</p>
       </FieldSetCol3>}
 
-      {TREE_LAYERS.value.GEN > 1 && <FieldSetCol3  
+      {TREE_LAYERS.value.PLY > 1 && <FieldSetCol3  
                                   title ={`(ρ) pokolenie 2`}
                                   name=   "cofigLayer2">
         <InputNumber name="gen2sPA"  value={TREE_LAYERS.value.gen2sPA} onInput={changeConfigFractions} title="sPA" class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
@@ -81,7 +81,7 @@ export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
         <p class={`text-[10px]`} >sPE: {TREE_LAYERS.value.gen2sPE}</p>
       </FieldSetCol3>}
 
-      {TREE_LAYERS.value.GEN > 2 && <FieldSetCol3  
+      {TREE_LAYERS.value.PLY > 2 && <FieldSetCol3  
                                   title ={`(ρ) pokolenie 3`}
                                   name=   "cofigLayer3">
         <InputNumber name="gen3sPA"  value={TREE_LAYERS.value.gen3sPA} onInput={changeConfigFractions} title="sPA" class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
@@ -92,7 +92,7 @@ export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
         <p class={`text-[10px]`} >sPE: {TREE_LAYERS.value.gen3sPE}</p>
       </FieldSetCol3>}
 
-      {TREE_LAYERS.value.GEN > 3 && <FieldSetCol3  
+      {TREE_LAYERS.value.PLY > 3 && <FieldSetCol3  
                                   title ={`(ρ) pokolenie 4`}
                                   name=   "cofigLayer4">
         <InputNumber name="gen4sPA"  value={TREE_LAYERS.value.gen4sPA} onInput={changeConfigFractions} title="sPA" class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
@@ -103,7 +103,7 @@ export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
         <p class={`text-[10px]`} >sPE: {TREE_LAYERS.value.gen4sPE}</p>
       </FieldSetCol3>}
 
-      {TREE_LAYERS.value.GEN > 4 && <FieldSetCol3  
+      {TREE_LAYERS.value.PLY > 4 && <FieldSetCol3  
                                   title ={`(ρ) pokolenie 5`}
                                   name=   "cofigLayer5">
         <InputNumber name="gen5sPA"  value={TREE_LAYERS.value.gen5sPA} onInput={changeConfigFractions} title="sPA" class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
@@ -114,7 +114,7 @@ export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
         <p class={`text-[10px]`} >sPE: {TREE_LAYERS.value.gen5sPE}</p>
       </FieldSetCol3>}
 
-      {TREE_LAYERS.value.GEN > 5 && <FieldSetCol3  
+      {TREE_LAYERS.value.PLY > 5 && <FieldSetCol3  
                                   title ={`(ρ) pokolenie 6`}
                                   name=   "cofigLayer6">
         <InputNumber name="gen6sPA"  value={TREE_LAYERS.value.gen6sPA} onInput={changeConfigFractions} title="sPA" class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />
@@ -125,7 +125,7 @@ export function SvgFractionTreeConfig(props: SvgFractionTreeConfigProps) {
         <p class={`text-[10px]`} >sPE: {TREE_LAYERS.value.gen6sPE}</p>
       </FieldSetCol3>}
 
-      {TREE_LAYERS.value.GEN > 6 && <FieldSetCol3  
+      {TREE_LAYERS.value.PLY > 6 && <FieldSetCol3  
                                   title ={`(ρ) pokolenie 7`}
                                   name=   "cofigLayer7">
         <InputNumber name="gen7sPA"  value={TREE_LAYERS.value.gen7sPA} onInput={changeConfigFractions} title="sPA" class4label={` h-[33px] text-[16.5px] `} class4input={` h-[40px] text-[26.5px]`} min={1} max={9} step={1} />

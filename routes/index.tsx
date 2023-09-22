@@ -28,6 +28,7 @@ export default function Home() {
       themeNr={0} sizeHead={50} sizeFoot={30} overFlowX="scroll" overFlowY="scroll"
       class="flex-1 flex flex-col flex-nowrap " title="Generator SVG Sekwencji Drzewiastej"
     > 
+      
       <div class="flex-1 box-border w-full h-full px-[30px] mb-[5px]">
         <div style="overflow: scroll"  class="box-border flex-1  w-full h-full border-[6px] border-slate-700/10" >
           <Svg sizePX={'2000px'} class={``}>      
@@ -35,13 +36,10 @@ export default function Home() {
           </Svg>
         </div>  
       </div>
-      
-       
-
+      <br />
+      <hr />
+      <br />
       <SignalStateDiagnosticOutPut  />
-      
-
-      <div>itemX</div>
     </BoxFlex>
 
 
